@@ -160,6 +160,39 @@
   }
 }
 
+@keyframes float-desktop-1 {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  33% {
+    transform: translateY(-6px) rotate(0.5deg);
+  }
+  66% {
+    transform: translateY(-3px) rotate(-0.3deg);
+  }
+}
+
+@keyframes float-desktop-2 {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  40% {
+    transform: translateY(-7px) rotate(-0.5deg);
+  }
+  80% {
+    transform: translateY(-4px) rotate(0.3deg);
+  }
+}
+
+@keyframes float-desktop-3 {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-6px) rotate(0.6deg);
+  }
+}
+
 .animate-fade-in {
   animation: fade-in 1s ease-out forwards;
 }
@@ -197,5 +230,22 @@
 
   .mobile-float-3 {
     animation: float-mobile-3 ease-in-out infinite;
+  }
+}
+
+@media (min-width: 1025px) {
+  .desktop-float-1 {
+    animation: float-desktop-1 7s ease-in-out infinite;
+    animation-delay: 0.5s;
+  }
+
+  .desktop-float-2 {
+    animation: float-desktop-2 7.5s ease-in-out infinite;
+    animation-delay: 1.2s;
+  }
+
+  .desktop-float-3 {
+    animation: float-desktop-3 7.2s ease-in-out infinite;
+    animation-delay: 0.8s;
   }
 }
