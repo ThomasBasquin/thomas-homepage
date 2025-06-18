@@ -13,7 +13,7 @@ export const HackerLines = ({ lines, isActive }: HackerLinesProps) => {
       {lines.map((line) => (
         <div
           key={line.id}
-          className="absolute text-green-400 font-mono text-sm hacker-line whitespace-nowrap"
+          className="absolute text-green-400 font-fira-code text-sm hacker-line whitespace-nowrap"
           style={{
             left: `${line.left}%`,
             top: `${line.top}px`,
