@@ -1,36 +1,89 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Thomas - Portfolio & Side Projects
 
-## Getting Started
+Portfolio personnel de Thomas présentant ses projets web avec une interface moderne et interactive.
 
-First, run the development server:
+## ✨ Fonctionnalités
+
+- **Design glassmorphisme** avec effets de flou et transparence
+- **Animations fluides** et interactions souris/tactile
+- **Responsive design** optimisé mobile et desktop
+- **Easter eggs interactifs** cachés dans l'interface
+- **Effets visuels** : particules flottantes, grille animée, parallax
+
+## 🚀 Projets présentés
+
+- **Quiz Ostéo** - Application de quiz en ostéopathie (React + Vite)
+- **Portfolio Martin** - Portfolio créatif de montage vidéo
+- **Pokédex** - Encyclopédie interactive des Pokémon (Next.js + PokeAPI)
+
+## 🎮 Easter Eggs
+
+Découvrez les fonctionnalités cachées :
+
+- **Triple-click** sur "Thomas" → Affiche l'aide des Easter eggs
+- **Konami Code** (↑↑↓↓←→←→) → Mode hacker avec lignes Matrix
+- **Tape "coin"** → Canard animé qui se balade ! 🦆
+
+## 🛠️ Technologies
+
+- **Next.js 15** avec App Router et Turbopack
+- **TypeScript** pour la sécurité de type
+- **Tailwind CSS** pour le styling
+- **React 19** avec hooks personnalisés
+- **Architecture modulaire** avec composants réutilisables
+
+## 📦 Installation
 
 ```bash
+# Cloner le projet
+git clone [URL_DU_REPO]
+cd thomas-homepage
+
+# Installer les dépendances
+npm install
+
+# Lancer le serveur de développement
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Ouvrir [http://localhost:3000](http://localhost:3000) dans votre navigateur.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 🔧 Scripts disponibles
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm run dev      # Serveur de développement avec Turbopack
+npm run build    # Build de production
+npm run start    # Serveur de production
+npm run lint     # Analyse ESLint
+```
 
-## Learn More
+## 📁 Structure du projet
 
-To learn more about Next.js, take a look at the following resources:
+```
+src/
+├── app/          # Pages Next.js (layout, page principal)
+├── components/   # Composants React réutilisables
+├── hooks/        # Hooks personnalisés (animations, Easter eggs)
+├── data/         # Données statiques et constantes
+├── types/        # Types TypeScript
+└── styles/       # Fichiers CSS (animations, composants)
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 🎨 Architecture
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Le projet suit une architecture Next.js modulaire avec :
 
-## Deploy on Vercel
+- **Séparation des responsabilités** : hooks pour la logique métier
+- **Composants focalisés** : chaque composant a une responsabilité unique  
+- **Styles organisés** : animations et styles séparés
+- **Performance optimisée** : throttling des événements, useCallback
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 🚀 Déploiement
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Le projet est optimisé pour le déploiement sur [Vercel](https://vercel.com) :
+
+```bash
+npm run build  # Vérifier que le build fonctionne
+```
+
+Le déploiement se fait automatiquement via Git avec Vercel.
