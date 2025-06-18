@@ -71,10 +71,10 @@ export default function Home() {
         />
 
         {/* Footer */}
-        <div className="mt-16 text-center">
+        <div className="mt-16 pb-8 text-center">
           <div className="flex items-center justify-center space-x-6 text-gray-500">
             <div className="w-8 h-[1px] bg-gradient-to-r from-transparent to-gray-500" />
-            <span className="text-sm tracking-wider">2024</span>
+            <span className="text-sm tracking-wider">© {new Date().getFullYear()} Thomas Basquin</span>
             <div className="w-8 h-[1px] bg-gradient-to-l from-transparent to-gray-500" />
           </div>
         </div>
