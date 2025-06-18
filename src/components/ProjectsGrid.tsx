@@ -14,7 +14,7 @@ export const ProjectsGrid = ({
 }: ProjectsGridProps) => {
   return (
     <div
-      className={`grid gap-8 max-w-6xl w-full ${
+      className={`grid gap-12 max-w-7xl w-full ${
         projects.length % 2 === 0
           ? "grid-cols-1 md:grid-cols-2"
           : "grid-cols-1 lg:grid-cols-3"
