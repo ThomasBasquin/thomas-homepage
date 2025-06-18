@@ -11,8 +11,8 @@ export const projects: Project[] = [
   },
   {
     id: 2,
-    title: "Portfolio Martin",
-    description: "Portfolio créatif montage vidéo",
+    title: "Portfolio Vidéo",
+    description: "Portfolio créatif montage vidéo de Martin",
     color: "from-purple-400 to-pink-400",
     icon: "🎬",
     url: "https://martinbasquin.thomasbasquin.fr/",
