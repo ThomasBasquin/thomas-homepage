@@ -1,0 +1,201 @@
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slide-up {
+  from {
+    opacity: 0;
+    transform: translateY(60px) scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes float-mobile-1 {
+  0%,
+  100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  33% {
+    transform: translateY(-8px) rotate(1deg);
+  }
+  66% {
+    transform: translateY(-4px) rotate(-0.5deg);
+  }
+}
+
+@keyframes float-mobile-2 {
+  0%,
+  100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  40% {
+    transform: translateY(-12px) rotate(-1deg);
+  }
+  80% {
+    transform: translateY(-6px) rotate(0.5deg);
+  }
+}
+
+@keyframes float-mobile-3 {
+  0%,
+  100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-10px) rotate(1.5deg);
+  }
+}
+
+@keyframes pulse-glow {
+  0%,
+  100% {
+    box-shadow: 0 0 20px rgba(147, 51, 234, 0.1);
+  }
+  50% {
+    box-shadow: 0 0 40px rgba(147, 51, 234, 0.3);
+  }
+}
+
+@keyframes morph-bounce {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1) rotateY(10deg);
+  }
+}
+
+@keyframes typing-blink {
+  0%,
+  50% {
+    opacity: 1;
+  }
+  51%,
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes rainbow-burst {
+  0% {
+    transform: scale(0) rotate(0deg);
+    opacity: 0;
+    filter: hue-rotate(0deg) brightness(1);
+  }
+  20% {
+    transform: scale(1.5) rotate(90deg);
+    opacity: 1;
+    filter: hue-rotate(60deg) brightness(1.5);
+  }
+  50% {
+    transform: scale(1) rotate(180deg);
+    opacity: 1;
+    filter: hue-rotate(180deg) brightness(2);
+  }
+  80% {
+    transform: scale(1.2) rotate(270deg);
+    opacity: 0.8;
+    filter: hue-rotate(300deg) brightness(1.5);
+  }
+  100% {
+    transform: scale(0.3) rotate(360deg);
+    opacity: 0;
+    filter: hue-rotate(360deg) brightness(0.5);
+  }
+}
+
+@keyframes matrix-flicker {
+  0%,
+  100% {
+    opacity: 0.4;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+@keyframes hacker-scroll {
+  0% {
+    transform: translateY(-100vh);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100vh);
+    opacity: 0;
+  }
+}
+
+@keyframes duck-waddle {
+  0%, 100% {
+    transform: rotateZ(-2deg);
+  }
+  50% {
+    transform: rotateZ(2deg);
+  }
+}
+
+@keyframes duck-jump {
+  0%, 100% {
+    transform: translateY(0) scale(1);
+  }
+  50% {
+    transform: translateY(-20px) scale(1.1);
+  }
+}
+
+.animate-fade-in {
+  animation: fade-in 1s ease-out forwards;
+}
+
+.animate-slide-up {
+  animation: slide-up 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+.morphing-icon:hover {
+  animation: morph-bounce 0.6s ease-out;
+}
+
+.typing-cursor {
+  animation: typing-blink 1s infinite;
+  color: #8b5cf6;
+  font-weight: bold;
+}
+
+.hacker-line {
+  animation: hacker-scroll 3s linear infinite;
+}
+
+@media (max-width: 1024px) {
+  .mobile-glow {
+    animation: pulse-glow 4s ease-in-out infinite;
+  }
+
+  .mobile-float-1 {
+    animation: float-mobile-1 ease-in-out infinite;
+  }
+
+  .mobile-float-2 {
+    animation: float-mobile-2 ease-in-out infinite;
+  }
+
+  .mobile-float-3 {
+    animation: float-mobile-3 ease-in-out infinite;
+  }
+}
