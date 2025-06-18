@@ -11,7 +11,7 @@ export const Header = ({ typedText, scrollY, hackerMode, onTripleClick }: Header
   return (
     <div className="text-center mb-16 animate-fade-in">
       <h1
-        className={`text-7xl font-bold mb-4 cursor-pointer select-none transition-all duration-500 ${
+        className={`text-7xl font-bold mb-4 cursor-pointer select-none transition-all duration-500 font-outfit ${
           hackerMode
             ? "bg-gradient-to-r from-green-400 via-green-500 to-green-600 bg-clip-text text-transparent"
             : "bg-gradient-to-r from-blue-400 via-purple-500 to-pink-400 bg-clip-text text-transparent"

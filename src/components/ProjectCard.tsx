@@ -39,8 +39,7 @@ export const ProjectCard = ({
         animationFillMode: "forwards",
       }}
       onTouchStart={onTouchStart}
-      onTouchEnd={onTouchEnd}
-    >
+      onTouchEnd={onTouchEnd}>
       <div
         className={`glass-card relative overflow-hidden rounded-3xl transition-all duration-500 ${
           isMobile
@@ -56,8 +55,7 @@ export const ProjectCard = ({
                 animationDuration: `${5 + index}s`,
               }
             : {}
-        }
-      >
+        }>
         {/* Decorative gradient background */}
         <div
           className={`absolute inset-0 bg-gradient-to-br ${project.color} opacity-5`}
@@ -76,16 +74,21 @@ export const ProjectCard = ({
               <div className="text-4xl transform group-hover:scale-110 group-hover:rotate-6 group-hover:-translate-y-2 transition-all duration-500">
                 {project.icon}
               </div>
-              <h3 className="text-2xl font-bold group-hover:text-white transition-colors duration-300 leading-tight">
+              <h3 className="text-2xl font-bold group-hover:text-white transition-colors duration-300 leading-tight font-outfit">
                 {project.title}
               </h3>
             </div>
             {project.id === 3 ? (
               <div className="w-2 h-2 rounded-full bg-gray-500" />
             ) : (
-              <div
-                className={`w-2 h-2 rounded-full bg-gradient-to-r ${project.color} animate-pulse`}
-              />
+              <div className="relative transform -translate-x-2">
+                <div
+                  className={`w-2 h-2 rounded-full bg-gradient-to-r ${project.color} animate-pulse`}
+                />
+                <div
+                  className={`absolute inset-0 w-2 h-2 rounded-full bg-gradient-to-r ${project.color} opacity-40 animate-ping`}
+                />
+              </div>
             )}
           </div>
 
@@ -100,8 +103,7 @@ export const ProjectCard = ({
               {getTechTags(project.id).map((tag) => (
                 <span
                   key={tag}
-                  className="px-3 py-1 bg-white/10 rounded-full text-xs text-gray-300"
-                >
+                  className="px-3 py-1 bg-white/10 rounded-full text-xs text-gray-300">
                   {tag}
                 </span>
               ))}
@@ -113,8 +115,7 @@ export const ProjectCard = ({
             href={project.url}
             target="_blank"
             rel="noopener noreferrer"
-            className={`relative overflow-hidden px-6 py-3 rounded-xl font-semibold transition-all duration-300 cursor-pointer inline-flex items-center justify-center bg-gradient-to-r ${project.color} bg-opacity-90 text-white hover:scale-105 hover:shadow-lg`}
-          >
+            className={`relative overflow-hidden px-6 py-3 rounded-xl font-bold font-bold-force text-base transition-all duration-300 cursor-pointer inline-flex items-center justify-center bg-gradient-to-r ${project.color} bg-opacity-90 text-white hover:scale-105 hover:shadow-lg`}>
             <div className="absolute inset-0 bg-black/20" />
             <span className="relative z-10 flex items-center gap-2 drop-shadow-sm">
               Découvrir
@@ -122,8 +123,7 @@ export const ProjectCard = ({
                 className="w-4 h-4 transition-transform group-hover:translate-x-1"
                 fill="none"
                 stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
+                viewBox="0 0 24 24">
                 <path
                   strokeLinecap="round"
                   strokeLinejoin="round"
