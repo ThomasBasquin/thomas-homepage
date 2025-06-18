@@ -46,7 +46,7 @@ export const ProjectCard = ({
             ? `mobile-glow mobile-float-${index + 1} ${
                 touchedProject === project.id ? "glass-card-active" : ""
               }`
-            : "hover:glass-card-hover"
+            : `hover:glass-card-hover desktop-float-${index + 1}`
         }`}
         style={
           isMobile
