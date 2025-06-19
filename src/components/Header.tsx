@@ -13,8 +13,8 @@ export const Header = ({ typedText, scrollY, hackerMode, onTripleClick }: Header
       <h1
         className={`text-7xl font-bold mb-4 cursor-pointer select-none transition-all duration-500 font-outfit ${
           hackerMode
-            ? "bg-gradient-to-r from-green-400 via-green-500 to-green-600 bg-clip-text text-transparent"
-            : "bg-gradient-to-r from-blue-400 via-purple-500 to-pink-400 bg-clip-text text-transparent"
+            ? "bg-gradient-to-r from-green-400 via-green-500 to-green-600 bg-clip-text text-transparent neon-title-hacker"
+            : "bg-gradient-to-r from-blue-400 via-purple-500 to-pink-400 bg-clip-text text-transparent neon-title"
         }`}
         style={{
           transform: `translateY(${scrollY * 0.1}px)`,
