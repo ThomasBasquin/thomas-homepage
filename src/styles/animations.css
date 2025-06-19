@@ -165,10 +165,10 @@
     transform: translateY(0px) rotate(0deg);
   }
   33% {
-    transform: translateY(-6px) rotate(0.5deg);
+    transform: translateY(-9px) rotate(0.7deg);
   }
   66% {
-    transform: translateY(-3px) rotate(-0.3deg);
+    transform: translateY(-4px) rotate(-0.5deg);
   }
 }
 
@@ -177,10 +177,10 @@
     transform: translateY(0px) rotate(0deg);
   }
   40% {
-    transform: translateY(-7px) rotate(-0.5deg);
+    transform: translateY(-10px) rotate(-0.8deg);
   }
   80% {
-    transform: translateY(-4px) rotate(0.3deg);
+    transform: translateY(-6px) rotate(0.5deg);
   }
 }
 
@@ -189,7 +189,7 @@
     transform: translateY(0px) rotate(0deg);
   }
   50% {
-    transform: translateY(-6px) rotate(0.6deg);
+    transform: translateY(-9px) rotate(0.9deg);
   }
 }
 
@@ -235,17 +235,17 @@
 
 @media (min-width: 1025px) {
   .desktop-float-1 {
-    animation: float-desktop-1 7s ease-in-out infinite;
+    animation: float-desktop-1 6.2s ease-in-out infinite;
     animation-delay: 0.5s;
   }
 
   .desktop-float-2 {
-    animation: float-desktop-2 7.5s ease-in-out infinite;
+    animation: float-desktop-2 6.7s ease-in-out infinite;
     animation-delay: 1.2s;
   }
 
   .desktop-float-3 {
-    animation: float-desktop-3 7.2s ease-in-out infinite;
+    animation: float-desktop-3 6.5s ease-in-out infinite;
     animation-delay: 0.8s;
   }
 }
