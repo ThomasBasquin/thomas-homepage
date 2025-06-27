@@ -23,6 +23,6 @@ export const projects: Project[] = [
     description: "Encyclopédie interactive des Pokémon",
     color: "from-yellow-400 to-orange-400",
     icon: "⚡",
-    url: "#",
+    url: "https://pokedex.thomasbasquin.fr/",
   },
 ];
