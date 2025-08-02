@@ -20,40 +20,24 @@
   }
 }
 
-@keyframes float-mobile-1 {
-  0%,
-  100% {
-    transform: translateY(0px) rotate(0deg);
-  }
-  33% {
-    transform: translateY(-8px) rotate(1deg);
-  }
-  66% {
-    transform: translateY(-4px) rotate(-0.5deg);
-  }
+@keyframes space-drift-1 {
+  0% { transform: translate3d(0px, 0px, 0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg); }
+  50% { transform: translate3d(15px, -20px, 0px) rotateX(1deg) rotateY(-0.5deg) rotateZ(1deg); }
+  100% { transform: translate3d(0px, 0px, 0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg); }
 }
 
-@keyframes float-mobile-2 {
-  0%,
-  100% {
-    transform: translateY(0px) rotate(0deg);
-  }
-  40% {
-    transform: translateY(-12px) rotate(-1deg);
-  }
-  80% {
-    transform: translateY(-6px) rotate(0.5deg);
-  }
+@keyframes space-drift-2 {
+  0% { transform: translate3d(0px, 0px, 0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg); }
+  33% { transform: translate3d(-18px, -25px, 0px) rotateX(-0.5deg) rotateY(1deg) rotateZ(-1deg); }
+  66% { transform: translate3d(12px, -15px, 0px) rotateX(1deg) rotateY(-0.5deg) rotateZ(0.5deg); }
+  100% { transform: translate3d(0px, 0px, 0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg); }
 }
 
-@keyframes float-mobile-3 {
-  0%,
-  100% {
-    transform: translateY(0px) rotate(0deg);
-  }
-  50% {
-    transform: translateY(-10px) rotate(1.5deg);
-  }
+@keyframes space-drift-3 {
+  0% { transform: translate3d(0px, 0px, 0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg); }
+  40% { transform: translate3d(22px, -18px, 0px) rotateX(1deg) rotateY(-1deg) rotateZ(1.5deg); }
+  80% { transform: translate3d(-16px, -28px, 0px) rotateX(-0.5deg) rotateY(1deg) rotateZ(-1deg); }
+  100% { transform: translate3d(0px, 0px, 0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg); }
 }
 
 @keyframes pulse-glow {
@@ -221,15 +205,18 @@
   }
 
   .mobile-float-1 {
-    animation: float-mobile-1 ease-in-out infinite;
+    animation: space-drift-1 16s ease-in-out infinite;
+    transform-style: preserve-3d;
   }
 
   .mobile-float-2 {
-    animation: float-mobile-2 ease-in-out infinite;
+    animation: space-drift-2 19s ease-in-out infinite;
+    transform-style: preserve-3d;
   }
 
   .mobile-float-3 {
-    animation: float-mobile-3 ease-in-out infinite;
+    animation: space-drift-3 22s ease-in-out infinite;
+    transform-style: preserve-3d;
   }
 }
 
