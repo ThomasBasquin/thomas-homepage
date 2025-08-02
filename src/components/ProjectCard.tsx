@@ -52,7 +52,6 @@ export const ProjectCard = ({
           isMobile
             ? {
                 animationDelay: `${2 + index * 0.5}s`,
-                animationDuration: `${5 + index}s`,
               }
             : {}
         }>
@@ -78,18 +77,14 @@ export const ProjectCard = ({
                 {project.title}
               </h3>
             </div>
-            {project.id === 3 ? (
-              <div className="w-2 h-2 rounded-full bg-gray-500" />
-            ) : (
-              <div className="relative transform -translate-x-2">
-                <div
-                  className={`w-2 h-2 rounded-full bg-gradient-to-r ${project.color} animate-pulse`}
-                />
-                <div
-                  className={`absolute inset-0 w-2 h-2 rounded-full bg-gradient-to-r ${project.color} opacity-40 animate-ping`}
-                />
-              </div>
-            )}
+            <div className="relative transform -translate-x-2">
+              <div
+                className={`w-2 h-2 rounded-full bg-gradient-to-r ${project.color} animate-pulse`}
+              />
+              <div
+                className={`absolute inset-0 w-2 h-2 rounded-full bg-gradient-to-r ${project.color} opacity-40 animate-ping`}
+              />
+            </div>
           </div>
 
           {/* Content */}
