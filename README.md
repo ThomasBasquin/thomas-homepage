@@ -1,6 +1,6 @@
 # Thomas - Portfolio & Side Projects
 
-Portfolio personnel de Thomas présentant ses projets web avec une interface moderne et interactive.
+Portfolio personnel présentant ses projets web avec une interface moderne et interactive.
 
 ## ✨ Fonctionnalités
 
