@@ -24,7 +24,7 @@ export const metadata: Metadata = {
   description: "Découvrez mes projets web : Quiz Ostéo, Portfolio Martin, Pokédex et plus encore",
   icons: {
     icon: [
-      { url: "/favicon.ico", type: "image/x-icon", sizes: "48x48" },
+      { url: "/favicon-tb.ico", type: "image/x-icon", sizes: "48x48" },
       { url: "/favicon-tb-32.png", type: "image/png", sizes: "32x32" },
     ],
     apple: "/apple-touch-icon-tb.png",
