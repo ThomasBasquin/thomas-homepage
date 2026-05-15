@@ -2,12 +2,11 @@ import { FULL_TEXT } from "@/data/constants";
 
 interface HeaderProps {
   typedText: string;
-  scrollY: number;
   hackerMode: boolean;
   onTripleClick: () => void;
 }
 
-export const Header = ({ typedText, scrollY, hackerMode, onTripleClick }: HeaderProps) => {
+export const Header = ({ typedText, hackerMode, onTripleClick }: HeaderProps) => {
   return (
     <div className="text-center mb-16 animate-fade-in">
       <h1
@@ -16,10 +15,6 @@ export const Header = ({ typedText, scrollY, hackerMode, onTripleClick }: Header
             ? "bg-gradient-to-r from-green-400 via-green-500 to-green-600 bg-clip-text text-transparent neon-title-hacker"
             : "bg-gradient-to-r from-blue-400 via-purple-500 to-pink-400 bg-clip-text text-transparent neon-title"
         }`}
-        style={{
-          transform: `translateY(${scrollY * 0.1}px)`,
-          transition: "transform 0.1s ease-out",
-        }}
         onClick={onTripleClick}
       >
         Thomas

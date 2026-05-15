@@ -24,7 +24,6 @@ export default function Home() {
     mousePosition,
     particles,
     isMobile,
-    scrollY,
     typedText,
     hackerLines,
     touchedProject,
@@ -59,7 +58,6 @@ export default function Home() {
       <div className="relative z-10 flex flex-col items-center justify-center min-h-screen p-8">
         <Header
           typedText={typedText}
-          scrollY={scrollY}
           hackerMode={hackerMode}
           onTripleClick={handleTripleClick}
         />
