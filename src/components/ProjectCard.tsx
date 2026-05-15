@@ -20,11 +20,11 @@ export const ProjectCard = ({
   const getTechTags = (projectId: number) => {
     switch (projectId) {
       case 1:
-        return ["React", "Quiz Engine", "Medical"];
+        return ["React", "TypeScript", "Zustand"];
       case 2:
-        return ["Video Editing", "Creative", "Portfolio"];
+        return ["HTML", "CSS"];
       case 3:
-        return ["Next.js", "API Integration", "Gaming"];
+        return ["Next.js", "TypeScript", "Tailwind"];
       default:
         return [];
     }
