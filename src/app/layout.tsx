@@ -23,11 +23,8 @@ export const metadata: Metadata = {
   title: "Thomas - Portfolio & Side Projects",
   description: "Découvrez mes projets web : Quiz Ostéo, Portfolio Martin, Pokédex et plus encore",
   icons: {
-    icon: [
-      { url: "/favicon-tb.ico", type: "image/x-icon", sizes: "48x48" },
-      { url: "/favicon-tb-32.png", type: "image/png", sizes: "32x32" },
-    ],
-    apple: "/apple-touch-icon-tb.png",
+    icon: "/favicon.svg",
+    apple: "/apple-touch-icon.png",
   },
 };
 
