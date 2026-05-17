@@ -30,7 +30,7 @@ export const Duck = ({ isActive }: DuckProps) => {
 
   return (
     <div
-      className={`fixed pointer-events-none z-50 transition-all duration-500 ease-in-out ${
+      className={`absolute pointer-events-none z-50 transition-all duration-500 ease-in-out ${
         isJumping ? "transform scale-110 -translate-y-4" : ""
       }`}
       style={{

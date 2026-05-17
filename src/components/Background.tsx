@@ -1,5 +1,6 @@
 interface BackgroundProps {
   mousePosition: { x: number; y: number };
+  scrollY: number;
   particles: Array<{
     id: number;
     left: number;
@@ -9,17 +10,21 @@ interface BackgroundProps {
   }>;
 }
 
-export const Background = ({ mousePosition, particles }: BackgroundProps) => {
+export const Background = ({
+  mousePosition,
+  particles,
+  scrollY,
+}: BackgroundProps) => {
   return (
     <>
       {/* Animated background */}
-      <div className="absolute inset-0 bg-gradient-to-br from-black via-gray-900 to-black">
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(120,119,198,0.1),transparent_50%)]" />
         <div
-          className="fixed w-96 h-96 bg-gradient-to-r from-blue-600/20 to-purple-600/20 rounded-full blur-3xl transition-transform duration-300 ease-out pointer-events-none"
+          className="absolute hidden lg:block w-96 h-96 bg-gradient-to-r from-blue-600/20 to-purple-600/20 rounded-full blur-3xl transition-transform duration-300 ease-out"
           style={{
             transform: `translate(${mousePosition.x - 192}px, ${
-              mousePosition.y - 192
+              mousePosition.y + scrollY - 192
             }px)`,
           }}
         />

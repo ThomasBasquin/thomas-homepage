@@ -9,7 +9,7 @@ export const HackerLines = ({ lines, isActive }: HackerLinesProps) => {
   if (!isActive) return null;
 
   return (
-    <div className="fixed inset-0 pointer-events-none z-30 overflow-hidden">
+    <div className="absolute inset-0 pointer-events-none z-30 overflow-hidden">
       {lines.map((line) => (
         <div
           key={line.id}

@@ -26,19 +26,18 @@ export default function Home() {
     isMobile,
     typedText,
     hackerLines,
+    scrollY,
     touchedProject,
     setTouchedProject,
   } = useAnimations(hackerMode);
 
   return (
     <div
-      className={`min-h-screen text-white overflow-hidden relative transition-colors duration-1000 ${
-        hackerMode ? "bg-black" : "bg-black"
-      }`}
+      className="min-h-[100lvh] bg-gradient-to-br from-black via-gray-900 to-black text-white relative"
     >
       {/* Grid Overlay */}
       <div
-        className={`grid-overlay fixed inset-0 pointer-events-none z-20 ${
+        className={`grid-overlay absolute inset-0 pointer-events-none z-20 ${
           hackerMode ? "hacker-grid" : ""
         }`}
       />
@@ -52,10 +51,14 @@ export default function Home() {
       <Duck isActive={duckMode} />
 
       {/* Background Effects */}
-      <Background mousePosition={mousePosition} particles={particles} />
+      <Background
+        mousePosition={mousePosition}
+        particles={particles}
+        scrollY={scrollY}
+      />
 
       {/* Main Content */}
-      <div className="relative z-10 flex flex-col items-center justify-center min-h-screen p-8">
+      <div className="relative z-10 flex flex-col items-center justify-center min-h-[100lvh] p-8">
         <Header
           typedText={typedText}
           hackerMode={hackerMode}
