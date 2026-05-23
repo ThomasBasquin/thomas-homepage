@@ -14,10 +14,3 @@ export interface Particle {
   delay: number;
   duration: number;
 }
-
-export interface HackerLine {
-  id: number;
-  text: string;
-  top: number;
-  left: number;
-}

@@ -2,21 +2,12 @@ import { FULL_TEXT } from "@/data/constants";
 
 interface HeaderProps {
   typedText: string;
-  hackerMode: boolean;
-  onTripleClick: () => void;
 }
 
-export const Header = ({ typedText, hackerMode, onTripleClick }: HeaderProps) => {
+export const Header = ({ typedText }: HeaderProps) => {
   return (
     <div className="text-center mb-16 animate-fade-in">
-      <h1
-        className={`text-7xl font-bold mb-4 cursor-pointer select-none transition-all duration-500 font-outfit ${
-          hackerMode
-            ? "bg-gradient-to-r from-green-400 via-green-500 to-green-600 bg-clip-text text-transparent neon-title-hacker"
-            : "bg-gradient-to-r from-blue-400 via-purple-500 to-pink-400 bg-clip-text text-transparent neon-title"
-        }`}
-        onClick={onTripleClick}
-      >
+      <h1 className="text-7xl font-bold mb-4 select-none transition-all duration-500 font-outfit bg-gradient-to-r from-blue-400 via-purple-500 to-pink-400 bg-clip-text text-transparent neon-title">
         Thomas
       </h1>
       <p className="text-xl text-gray-400 font-light tracking-wide min-h-[28px]">

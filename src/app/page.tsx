@@ -1,54 +1,29 @@
 "use client";
 
-import { useEasterEggs } from "@/hooks/useEasterEggs";
 import { useAnimations } from "@/hooks/useAnimations";
 import { Background } from "@/components/Background";
 import { Header } from "@/components/Header";
 import { ProjectsGrid } from "@/components/ProjectsGrid";
-import { EasterEggModal } from "@/components/EasterEggModal";
-import { HackerLines } from "@/components/HackerLines";
-import { Duck } from "@/components/Duck";
 import "@/styles/animations.css";
 import "@/styles/components.css";
 
 export default function Home() {
   const {
-    showEasterEggInfo,
-    setShowEasterEggInfo,
-    hackerMode,
-    duckMode,
-    handleTripleClick,
-  } = useEasterEggs();
-
-  const {
     mousePosition,
     particles,
     isMobile,
     typedText,
-    hackerLines,
     scrollY,
     touchedProject,
     setTouchedProject,
-  } = useAnimations(hackerMode);
+  } = useAnimations();
 
   return (
     <div
       className="min-h-[100lvh] bg-gradient-to-br from-black via-gray-900 to-black text-white relative"
     >
       {/* Grid Overlay */}
-      <div
-        className={`grid-overlay absolute inset-0 pointer-events-none z-20 ${
-          hackerMode ? "hacker-grid" : ""
-        }`}
-      />
-
-      {/* Easter Egg Components */}
-      <HackerLines lines={hackerLines} isActive={hackerMode} />
-      <EasterEggModal
-        isOpen={showEasterEggInfo}
-        onClose={() => setShowEasterEggInfo(false)}
-      />
-      <Duck isActive={duckMode} />
+      <div className="grid-overlay absolute inset-0 pointer-events-none z-20" />
 
       {/* Background Effects */}
       <Background
@@ -59,11 +34,7 @@ export default function Home() {
 
       {/* Main Content */}
       <div className="relative z-10 flex flex-col items-center justify-center min-h-[100lvh] p-8">
-        <Header
-          typedText={typedText}
-          hackerMode={hackerMode}
-          onTripleClick={handleTripleClick}
-        />
+        <Header typedText={typedText} />
 
         <ProjectsGrid
           isMobile={isMobile}

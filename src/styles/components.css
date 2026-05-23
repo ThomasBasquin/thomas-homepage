@@ -12,16 +12,6 @@
   opacity: 0.26;
 }
 
-.hacker-grid {
-  background-image: linear-gradient(
-      rgba(0, 255, 0, 0.1) 1px,
-      transparent 1px
-    ),
-    linear-gradient(90deg, rgba(0, 255, 0, 0.1) 1px, transparent 1px);
-  background-size: 60px 60px;
-  opacity: 0.4;
-  animation: matrix-flicker 2s ease-in-out infinite;
-}
 
 .glass-card {
   background: rgba(255, 255, 255, 0.08);
@@ -81,14 +71,6 @@
   animation: neon-glow 3s ease-in-out infinite alternate;
 }
 
-.neon-title-hacker {
-  position: relative;
-  filter: drop-shadow(0 0 3px rgba(74, 222, 128, 0.4))
-          drop-shadow(0 0 6px rgba(34, 197, 94, 0.3))
-          drop-shadow(0 0 10px rgba(22, 163, 74, 0.2));
-  animation: neon-glow-green 3s ease-in-out infinite alternate;
-}
-
 @keyframes neon-glow {
   0%, 100% {
     filter: drop-shadow(0 0 3px rgba(96, 165, 250, 0.4))
@@ -102,15 +84,3 @@
   }
 }
 
-@keyframes neon-glow-green {
-  0%, 100% {
-    filter: drop-shadow(0 0 3px rgba(74, 222, 128, 0.4))
-            drop-shadow(0 0 6px rgba(34, 197, 94, 0.3))
-            drop-shadow(0 0 10px rgba(22, 163, 74, 0.2));
-  }
-  50% {
-    filter: drop-shadow(0 0 4px rgba(74, 222, 128, 0.5))
-            drop-shadow(0 0 8px rgba(34, 197, 94, 0.4))
-            drop-shadow(0 0 12px rgba(22, 163, 74, 0.3));
-  }
-}

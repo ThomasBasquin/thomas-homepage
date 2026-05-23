@@ -1,14 +1,13 @@
 import { useState, useEffect, useRef, useCallback } from "react";
-import { Particle, HackerLine } from "@/types";
-import { HACKER_TEXTS, FULL_TEXT } from "@/data/constants";
+import { Particle } from "@/types";
+import { FULL_TEXT } from "@/data/constants";
 
-export const useAnimations = (hackerMode: boolean) => {
+export const useAnimations = () => {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [particles, setParticles] = useState<Particle[]>([]);
   const [isMobile, setIsMobile] = useState(false);
   const [scrollY, setScrollY] = useState(0);
   const [typedText, setTypedText] = useState("");
-  const [hackerLines, setHackerLines] = useState<HackerLine[]>([]);
   const [touchedProject, setTouchedProject] = useState<number | null>(null);
   const lastUpdate = useRef(0);
 
@@ -52,27 +51,6 @@ export const useAnimations = (hackerMode: boolean) => {
     }
   }, [typedText]);
 
-  // Hacker lines effect
-  useEffect(() => {
-    if (hackerMode) {
-      const addHackerLine = () => {
-        const newLine = {
-          id: Date.now(),
-          text: HACKER_TEXTS[Math.floor(Math.random() * HACKER_TEXTS.length)],
-          top: -30,
-          left: Math.random() * 90,
-        };
-        
-        setHackerLines((prev) => [...prev.slice(-20), newLine]);
-      };
-
-      const interval = setInterval(addHackerLine, 150);
-      return () => clearInterval(interval);
-    } else {
-      setHackerLines([]);
-    }
-  }, [hackerMode]);
-
   // Setup event listeners
   useEffect(() => {
     checkMobile();
@@ -95,7 +73,6 @@ export const useAnimations = (hackerMode: boolean) => {
     isMobile,
     scrollY,
     typedText,
-    hackerLines,
     touchedProject,
     setTouchedProject,
   };

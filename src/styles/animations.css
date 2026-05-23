@@ -99,50 +99,7 @@
   }
 }
 
-@keyframes matrix-flicker {
-  0%,
-  100% {
-    opacity: 0.4;
-  }
-  50% {
-    opacity: 0.7;
-  }
-}
 
-@keyframes hacker-scroll {
-  0% {
-    transform: translateY(-100vh);
-    opacity: 0;
-  }
-  10% {
-    opacity: 1;
-  }
-  90% {
-    opacity: 1;
-  }
-  100% {
-    transform: translateY(100vh);
-    opacity: 0;
-  }
-}
-
-@keyframes duck-waddle {
-  0%, 100% {
-    transform: rotateZ(-2deg);
-  }
-  50% {
-    transform: rotateZ(2deg);
-  }
-}
-
-@keyframes duck-jump {
-  0%, 100% {
-    transform: translateY(0) scale(1);
-  }
-  50% {
-    transform: translateY(-20px) scale(1.1);
-  }
-}
 
 @keyframes float-desktop-1 {
   0%, 100% {
@@ -193,10 +150,6 @@
   animation: typing-blink 1s infinite;
   color: #8b5cf6;
   font-weight: bold;
-}
-
-.hacker-line {
-  animation: hacker-scroll 3s linear infinite;
 }
 
 @media (max-width: 1024px) {
