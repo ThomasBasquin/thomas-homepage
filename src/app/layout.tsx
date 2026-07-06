@@ -24,7 +24,7 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  title: "Thomas - Portfolio & Side Projects",
+  title: "Thomas - Portfolio & Projects",
   description: "Découvrez mes projets web : Quiz Ostéo, Portfolio Martin, Pokédex et plus encore",
   icons: {
     icon: "/favicon.svg",

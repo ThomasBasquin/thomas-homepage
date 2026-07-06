@@ -1,1 +1,1 @@
-export const FULL_TEXT = "Portfolio & Side Projects";
+export const FULL_TEXT = "Portfolio & Projects";
