@@ -1,4 +1,5 @@
 import { Project } from "@/types";
+import { ProjectIcon } from "./ProjectIcon";
 
 interface ProjectCardProps {
   project: Project;
@@ -74,8 +75,8 @@ export const ProjectCard = ({
           {/* Header with icon and title */}
           <div className="flex items-center justify-between mb-8">
             <div className="flex items-center gap-4">
-              <div className="text-4xl transform group-hover:scale-110 group-hover:rotate-6 group-hover:-translate-y-2 transition-all duration-500">
-                {project.icon}
+              <div className="transform group-hover:scale-110 group-hover:rotate-6 group-hover:-translate-y-2 transition-all duration-500">
+                <ProjectIcon name={project.icon} className="w-9 h-9" />
               </div>
               <h3 className="text-2xl font-bold group-hover:text-white transition-colors duration-300 leading-tight font-outfit">
                 {project.title}
