@@ -21,32 +21,31 @@
 
 html {
   min-height: 100%;
-  background: #111827;
+  background: #0b0d12;
 }
 
 body {
   min-height: 100%;
   margin: 0;
-  background-color: #111827;
+  background-color: #0b0d12;
   color: var(--foreground);
-  font-family: var(--font-space-grotesk), Arial, Helvetica, sans-serif;
+  font-family: var(--font-hanken), Arial, Helvetica, sans-serif;
 }
 
-* {
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-  -webkit-touch-callout: none;
-  -webkit-tap-highlight-color: transparent;
+.font-baloo {
+  font-family: var(--font-baloo), system-ui, sans-serif;
 }
 
-.font-outfit {
-  font-family: var(--font-outfit), system-ui, sans-serif;
+.font-petrona {
+  font-family: var(--font-petrona), Georgia, serif;
 }
 
-.font-fira-code {
-  font-family: var(--font-fira-code), 'Courier New', monospace;
+.font-monoton {
+  font-family: var(--font-monoton), cursive;
+}
+
+.font-press-start {
+  font-family: var(--font-press-start), monospace;
 }
 
 .font-bold-force {

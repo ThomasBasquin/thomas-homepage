@@ -1,1 +1,1 @@
-export const FULL_TEXT = "Portfolio & Projects";
+export const TAGLINE = "Je code. Voici la preuve.";

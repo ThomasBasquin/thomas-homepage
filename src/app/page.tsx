@@ -6,17 +6,10 @@ import { Header } from "@/components/Header";
 import { ProjectsGrid } from "@/components/ProjectsGrid";
 import "@/styles/animations.css";
 import "@/styles/components.css";
+import "@/styles/projectCards.css";
 
 export default function Home() {
-  const {
-    mousePosition,
-    particles,
-    isMobile,
-    typedText,
-    scrollY,
-    touchedProject,
-    setTouchedProject,
-  } = useAnimations();
+  const { mousePosition, particles, scrollY } = useAnimations();
 
   return (
     <div
@@ -34,20 +27,19 @@ export default function Home() {
 
       {/* Main Content */}
       <div className="relative z-10 flex flex-col items-center justify-center min-h-[100lvh] p-8">
-        <Header typedText={typedText} />
+        <Header />
 
-        <ProjectsGrid
-          isMobile={isMobile}
-          touchedProject={touchedProject}
-          setTouchedProject={setTouchedProject}
-        />
+        <h2 className="sr-only">Projets</h2>
+
+        <ProjectsGrid />
 
         {/* Footer */}
-        <div className="mt-16 pb-8 text-center">
-          <div className="flex items-center justify-center space-x-6 text-gray-500">
-            <div className="w-8 h-[1px] bg-gradient-to-r from-transparent to-gray-500" />
-            <span className="text-sm tracking-wider">© {new Date().getFullYear()} Thomas Basquin</span>
-            <div className="w-8 h-[1px] bg-gradient-to-l from-transparent to-gray-500" />
+        <div className="mt-20 pb-8 text-center">
+          <div className="flex items-center justify-center gap-3 text-gray-400">
+            <span className="h-1.5 w-1.5 rounded-full bg-purple-400 shadow-[0_0_8px_2px_rgba(192,132,252,0.5)]" />
+            <span className="text-sm font-medium tracking-wide">
+              © {new Date().getFullYear()} Thomas Basquin
+            </span>
           </div>
         </div>
       </div>

@@ -1,22 +1,42 @@
 import type { Metadata, Viewport } from "next";
-import { Space_Grotesk, Fira_Code, Outfit } from "next/font/google";
+import {
+  Hanken_Grotesk,
+  Baloo_2,
+  Petrona,
+  Monoton,
+  Press_Start_2P,
+} from "next/font/google";
 import "./globals.css";
 
-const spaceGrotesk = Space_Grotesk({
-  variable: "--font-space-grotesk",
+const hankenGrotesk = Hanken_Grotesk({
+  variable: "--font-hanken",
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700"],
+  weight: ["400", "500", "600", "700", "800"],
 });
 
-const firaCode = Fira_Code({
-  variable: "--font-fira-code",
+const baloo2 = Baloo_2({
+  variable: "--font-baloo",
   subsets: ["latin"],
+  weight: ["600", "700", "800"],
 });
 
-const outfit = Outfit({
-  variable: "--font-outfit",
+const petrona = Petrona({
+  variable: "--font-petrona",
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700"],
+  weight: ["500", "600", "700"],
+  style: ["normal", "italic"],
+});
+
+const monoton = Monoton({
+  variable: "--font-monoton",
+  subsets: ["latin"],
+  weight: "400",
+});
+
+const pressStart2P = Press_Start_2P({
+  variable: "--font-press-start",
+  subsets: ["latin"],
+  weight: "400",
 });
 
 export const viewport: Viewport = {
@@ -40,7 +60,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${spaceGrotesk.variable} ${firaCode.variable} ${outfit.variable} antialiased`}
+        className={`${hankenGrotesk.variable} ${baloo2.variable} ${petrona.variable} ${monoton.variable} ${pressStart2P.variable} antialiased`}
       >
         {children}
       </body>

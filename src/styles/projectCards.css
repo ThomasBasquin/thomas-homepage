@@ -1,0 +1,262 @@
+/* MyShelf — deep navy, shelf-riffle */
+
+.card-myshelf {
+  background: linear-gradient(155deg, oklch(0.19 0.035 262) 0%, oklch(0.24 0.05 264) 60%, oklch(0.28 0.07 266) 100%);
+  color: oklch(0.97 0.01 260);
+  box-shadow: 0 20px 60px -20px oklch(0.19 0.035 262 / 0.8);
+}
+
+.card-myshelf:hover {
+  box-shadow: 0 24px 70px -16px oklch(0.55 0.19 262 / 0.45);
+}
+
+.myshelf-shelf {
+  display: flex;
+  align-items: flex-end;
+  gap: 6px;
+  height: 3.5rem;
+}
+
+.myshelf-spine {
+  width: 0.85rem;
+  border-radius: 3px;
+  transform: rotate(0deg) translateY(0);
+  transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+  transition-delay: calc(var(--i) * 60ms);
+}
+
+.group:hover .myshelf-spine {
+  transform: rotate(-6deg) translateY(-6px);
+}
+
+.group:hover .myshelf-spine:nth-child(2) {
+  transform: rotate(4deg) translateY(-10px);
+}
+
+.group:hover .myshelf-spine:nth-child(3) {
+  transform: rotate(-3deg) translateY(-4px);
+}
+
+.myshelf-tag {
+  background: oklch(0.97 0.01 260 / 0.1);
+  color: oklch(0.94 0.02 260);
+}
+
+.myshelf-cta {
+  background: oklch(0.62 0.19 262);
+  color: oklch(0.99 0 0);
+}
+
+/* Ostéo (Marie Wach) — sage/cream, breathing glow */
+
+.card-osteo {
+  background: linear-gradient(160deg, oklch(0.89 0.045 155) 0%, oklch(0.91 0.03 110) 50%, oklch(0.93 0.035 90) 100%);
+  color: oklch(0.32 0.06 165);
+}
+
+.osteo-halo {
+  position: relative;
+  width: 3.5rem;
+  height: 3.5rem;
+}
+
+.osteo-halo::before {
+  content: "";
+  position: absolute;
+  inset: -0.5rem;
+  border-radius: 50%;
+  background: oklch(0.75 0.1 155 / 0.55);
+  filter: blur(14px);
+  animation: osteo-breathe 4.5s ease-in-out infinite;
+}
+
+.osteo-halo svg {
+  position: relative;
+}
+
+.osteo-tag {
+  background: oklch(0.32 0.06 165 / 0.1);
+  color: oklch(0.32 0.06 165);
+}
+
+.osteo-cta {
+  background: oklch(0.32 0.06 165);
+  color: oklch(0.96 0.02 100);
+}
+
+/* Quiz d'Ostéopathie — cream/gold, corner peel */
+
+.card-quiz {
+  background: linear-gradient(160deg, oklch(0.92 0.03 85) 0%, oklch(0.87 0.045 75) 100%);
+  color: oklch(0.3 0.045 60);
+}
+
+.quiz-corner {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 4.5rem;
+  height: 4.5rem;
+  transform: scale(0.6);
+  transform-origin: top right;
+  background: linear-gradient(135deg, transparent 50%, oklch(0.74 0.13 80) 50.5%);
+  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.group:hover .quiz-corner {
+  transform: scale(1);
+}
+
+.quiz-tag {
+  background: oklch(0.3 0.045 60 / 0.1);
+  color: oklch(0.3 0.045 60);
+}
+
+.quiz-cta {
+  background: oklch(0.55 0.12 75);
+  color: oklch(0.98 0.02 90);
+}
+
+/* Martin Basquin — neon tube on black */
+
+.card-martin {
+  background:
+    repeating-linear-gradient(
+      transparent 0px,
+      transparent 3px,
+      oklch(1 0 0 / 0.02) 3px,
+      oklch(1 0 0 / 0.02) 4px
+    ),
+    radial-gradient(circle at 50% 0%, oklch(0.22 0.05 300) 0%, oklch(0.08 0 0) 65%);
+  color: oklch(0.95 0 0);
+}
+
+.martin-neon {
+  letter-spacing: 0.02em;
+  text-shadow:
+    0 0 6px oklch(0.75 0.25 340 / 0.8),
+    0 0 16px oklch(0.75 0.25 340 / 0.5),
+    0 0 30px oklch(0.6 0.28 195 / 0.35);
+}
+
+.group:hover .martin-neon {
+  animation: martin-flicker 1.4s linear;
+}
+
+.martin-tag {
+  background: oklch(1 0 0 / 0.08);
+  color: oklch(0.9 0.03 195);
+  border: 1px solid oklch(1 0 0 / 0.12);
+}
+
+.martin-cta {
+  background: transparent;
+  color: oklch(0.85 0.16 195);
+  border: 1.5px solid oklch(0.85 0.16 195 / 0.6);
+}
+
+.group:hover .martin-cta {
+  box-shadow: 0 0 18px oklch(0.85 0.16 195 / 0.4);
+}
+
+/* Pokédex — saturated green, capture flash */
+
+.card-pokedex {
+  background: linear-gradient(160deg, oklch(0.5 0.14 145) 0%, oklch(0.4 0.12 148) 100%);
+  color: oklch(0.99 0 0);
+}
+
+.pokedex-ball-wrap {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 3.5rem;
+  height: 3.5rem;
+  border-radius: 50%;
+  background: oklch(0.99 0 0 / 0.92);
+}
+
+.pokedex-ball-wrap::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: oklch(0.99 0 0);
+  opacity: 0;
+}
+
+.group:hover .pokedex-ball-wrap svg {
+  animation: pokedex-shake 0.6s ease-in-out;
+}
+
+.group:hover .pokedex-ball-wrap::after {
+  animation: pokedex-flash 0.6s ease-out;
+}
+
+.pokedex-badge {
+  color: oklch(0.99 0 0 / 0.75);
+  letter-spacing: 0.05em;
+}
+
+.pokedex-tag {
+  background: oklch(0.99 0 0 / 0.14);
+  color: oklch(0.99 0 0 / 0.92);
+}
+
+.pokedex-cta {
+  background: oklch(0.99 0 0);
+  color: oklch(0.5 0.19 25);
+}
+
+/* Keyframes */
+
+@keyframes osteo-breathe {
+  0%, 100% { transform: scale(0.92); opacity: 0.6; }
+  50% { transform: scale(1.12); opacity: 0.9; }
+}
+
+@keyframes martin-flicker {
+  0%, 19%, 21%, 23%, 54%, 56%, 100% { opacity: 1; }
+  20%, 22%, 55% { opacity: 0.35; }
+}
+
+@keyframes pokedex-shake {
+  0%, 100% { transform: rotate(0deg); }
+  20% { transform: rotate(-18deg); }
+  40% { transform: rotate(14deg); }
+  60% { transform: rotate(-10deg); }
+  80% { transform: rotate(6deg); }
+}
+
+@keyframes pokedex-flash {
+  0% { opacity: 0; }
+  30% { opacity: 0.8; }
+  100% { opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .osteo-halo::before,
+  .group:hover .martin-neon,
+  .group:hover .pokedex-ball-wrap svg,
+  .group:hover .pokedex-ball-wrap::after,
+  .myshelf-spine {
+    animation: none !important;
+  }
+
+  .group:hover .myshelf-spine {
+    transform: none;
+  }
+
+  .quiz-corner {
+    transition: none;
+  }
+
+  .project-card {
+    transition: none !important;
+  }
+
+  .project-card:hover {
+    transform: none !important;
+  }
+}

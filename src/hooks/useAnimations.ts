@@ -1,14 +1,11 @@
 import { useState, useEffect, useRef, useCallback } from "react";
 import { Particle } from "@/types";
-import { FULL_TEXT } from "@/data/constants";
 
 export const useAnimations = () => {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [particles, setParticles] = useState<Particle[]>([]);
   const [isMobile, setIsMobile] = useState(false);
   const [scrollY, setScrollY] = useState(0);
-  const [typedText, setTypedText] = useState("");
-  const [touchedProject, setTouchedProject] = useState<number | null>(null);
   const lastUpdate = useRef(0);
 
   const checkMobile = useCallback(() => {
@@ -26,7 +23,7 @@ export const useAnimations = () => {
   }, [isMobile]);
 
   const generateParticles = useCallback(() => {
-    const particleCount = isMobile ? 20 : 30;
+    const particleCount = isMobile ? 10 : 16;
     const newParticles = Array.from({ length: particleCount }, (_, i) => ({
       id: i,
       left: Math.random() * 100,
@@ -40,16 +37,6 @@ export const useAnimations = () => {
   const handleScroll = useCallback(() => {
     setScrollY(window.scrollY);
   }, []);
-
-  // Typing effect
-  useEffect(() => {
-    if (typedText.length < FULL_TEXT.length) {
-      const timeout = setTimeout(() => {
-        setTypedText(FULL_TEXT.slice(0, typedText.length + 1));
-      }, 100);
-      return () => clearTimeout(timeout);
-    }
-  }, [typedText]);
 
   // Setup event listeners
   useEffect(() => {
@@ -70,10 +57,6 @@ export const useAnimations = () => {
   return {
     mousePosition,
     particles,
-    isMobile,
     scrollY,
-    typedText,
-    touchedProject,
-    setTouchedProject,
   };
 };
