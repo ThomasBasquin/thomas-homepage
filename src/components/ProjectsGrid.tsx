@@ -13,25 +13,23 @@ export const ProjectsGrid = ({
   setTouchedProject,
 }: ProjectsGridProps) => {
   return (
-    <div
-      className={`grid gap-12 max-w-7xl w-full ${
-        projects.length % 2 === 0
-          ? "grid-cols-1 md:grid-cols-2"
-          : "grid-cols-1 lg:grid-cols-3"
-      }`}
-    >
+    <div className="flex flex-wrap justify-center gap-12 max-w-7xl w-full">
       {projects.map((project, index) => (
-        <ProjectCard
+        <div
           key={project.id}
-          project={project}
-          index={index}
-          isMobile={isMobile}
-          touchedProject={touchedProject}
-          onTouchStart={() => setTouchedProject(project.id)}
-          onTouchEnd={() =>
-            setTimeout(() => setTouchedProject(null), 2000)
-          }
-        />
+          className="w-full md:w-[calc(50%-1.5rem)] lg:w-[calc(33.333%-2rem)]"
+        >
+          <ProjectCard
+            project={project}
+            index={index}
+            isMobile={isMobile}
+            touchedProject={touchedProject}
+            onTouchStart={() => setTouchedProject(project.id)}
+            onTouchEnd={() =>
+              setTimeout(() => setTouchedProject(null), 2000)
+            }
+          />
+        </div>
       ))}
     </div>
   );

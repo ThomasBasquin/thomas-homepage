@@ -20,10 +20,14 @@ export const ProjectCard = ({
   const getTechTags = (projectId: number) => {
     switch (projectId) {
       case 1:
-        return ["React", "TypeScript", "Zustand"];
+        return ["Next.js", "TypeScript", "PWA"];
       case 2:
-        return ["HTML", "CSS"];
+        return ["Astro", "TypeScript", "Leaflet"];
       case 3:
+        return ["React", "TypeScript", "Zustand"];
+      case 4:
+        return ["HTML", "CSS"];
+      case 5:
         return ["Next.js", "TypeScript", "Tailwind"];
       default:
         return [];
@@ -43,10 +47,10 @@ export const ProjectCard = ({
       <div
         className={`glass-card relative overflow-hidden rounded-3xl transition-all duration-500 ${
           isMobile
-            ? `mobile-glow mobile-float-${index + 1} ${
+            ? `mobile-glow mobile-float-${(index % 3) + 1} ${
                 touchedProject === project.id ? "glass-card-active" : ""
               }`
-            : `hover:glass-card-hover desktop-float-${index + 1}`
+            : `hover:glass-card-hover desktop-float-${(index % 3) + 1}`
         }`}
         style={
           isMobile
