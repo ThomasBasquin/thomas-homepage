@@ -5,6 +5,7 @@ import {
   Petrona,
   Monoton,
   Press_Start_2P,
+  Bungee,
 } from "next/font/google";
 import "./globals.css";
 
@@ -12,6 +13,12 @@ const hankenGrotesk = Hanken_Grotesk({
   variable: "--font-hanken",
   subsets: ["latin"],
   weight: ["400", "500", "600", "700", "800"],
+});
+
+const bungee = Bungee({
+  variable: "--font-bungee",
+  subsets: ["latin"],
+  weight: "400",
 });
 
 const baloo2 = Baloo_2({
@@ -60,7 +67,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${hankenGrotesk.variable} ${baloo2.variable} ${petrona.variable} ${monoton.variable} ${pressStart2P.variable} antialiased`}
+        className={`${hankenGrotesk.variable} ${baloo2.variable} ${petrona.variable} ${monoton.variable} ${pressStart2P.variable} ${bungee.variable} antialiased`}
       >
         {children}
       </body>

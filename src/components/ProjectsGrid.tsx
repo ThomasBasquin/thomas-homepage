@@ -7,10 +7,10 @@ export const ProjectsGrid = () => {
       {projects.map((project, index) => (
         <div
           key={project.id}
-          className={`animate-slide-up opacity-0 ${
+          className={`card-entrance float-${(index % 3) + 1} ${
             project.featured ? "md:col-span-2 lg:col-span-2" : ""
           }`}
-          style={{ animationDelay: `${0.5 + index * 0.15}s`, animationFillMode: "forwards" }}
+          style={{ "--enter-delay": `${0.5 + index * 0.15}s` } as React.CSSProperties}
         >
           <ProjectCardRouter project={project} />
         </div>

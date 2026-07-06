@@ -1,1 +1,1 @@
-export const TAGLINE = "Je code. Voici la preuve.";
+export const TAGLINE = "Je préfère montrer que raconter.";

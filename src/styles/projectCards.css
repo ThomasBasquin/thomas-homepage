@@ -58,20 +58,37 @@
   position: relative;
   width: 3.5rem;
   height: 3.5rem;
+  border-radius: 50%;
+  background: oklch(0.99 0 0 / 0.65);
+  box-shadow: 0 4px 14px oklch(0.32 0.06 165 / 0.15);
 }
 
 .osteo-halo::before {
   content: "";
   position: absolute;
-  inset: -0.5rem;
+  inset: -0.6rem;
   border-radius: 50%;
-  background: oklch(0.75 0.1 155 / 0.55);
-  filter: blur(14px);
+  background: oklch(0.7 0.12 155 / 0.6);
+  filter: blur(12px);
   animation: osteo-breathe 4.5s ease-in-out infinite;
+  z-index: -1;
 }
 
 .osteo-halo svg {
   position: relative;
+}
+
+.group:hover .osteo-halo::before {
+  animation-duration: 2.2s;
+}
+
+.osteo-petal {
+  position: absolute;
+  border-radius: 50%;
+  background: oklch(0.7 0.12 145 / 0.5);
+  filter: blur(1px);
+  pointer-events: none;
+  animation: osteo-drift 12s ease-in-out infinite;
 }
 
 .osteo-tag {
@@ -162,7 +179,14 @@
 /* Pokédex — saturated green, capture flash */
 
 .card-pokedex {
-  background: linear-gradient(160deg, oklch(0.5 0.14 145) 0%, oklch(0.4 0.12 148) 100%);
+  background:
+    repeating-linear-gradient(
+      transparent 0px,
+      transparent 3px,
+      oklch(0 0 0 / 0.05) 3px,
+      oklch(0 0 0 / 0.05) 4px
+    ),
+    linear-gradient(160deg, oklch(0.5 0.14 145) 0%, oklch(0.4 0.12 148) 100%);
   color: oklch(0.99 0 0);
 }
 
@@ -195,8 +219,25 @@
 }
 
 .pokedex-badge {
-  color: oklch(0.99 0 0 / 0.75);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4em;
+  color: oklch(0.92 0.05 145);
   letter-spacing: 0.05em;
+  background: oklch(0.28 0.05 148 / 0.7);
+  border: 1px solid oklch(0.92 0.05 145 / 0.25);
+  border-radius: 4px;
+  padding: 0.3em 0.5em;
+}
+
+.pokedex-led {
+  display: inline-block;
+  width: 0.4rem;
+  height: 0.4rem;
+  border-radius: 50%;
+  background: oklch(0.72 0.19 25);
+  box-shadow: 0 0 4px 1px oklch(0.72 0.19 25 / 0.8);
+  animation: pokedex-blink 2.4s ease-in-out infinite;
 }
 
 .pokedex-tag {
@@ -214,6 +255,11 @@
 @keyframes osteo-breathe {
   0%, 100% { transform: scale(0.92); opacity: 0.6; }
   50% { transform: scale(1.12); opacity: 0.9; }
+}
+
+@keyframes osteo-drift {
+  0%, 100% { transform: translate(0, 0); opacity: 0.3; }
+  50% { transform: translate(10px, -16px); opacity: 0.75; }
 }
 
 @keyframes martin-flicker {
@@ -235,11 +281,19 @@
   100% { opacity: 0; }
 }
 
+@keyframes pokedex-blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.25; }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .osteo-halo::before,
+  .osteo-petal,
+  .group:hover .osteo-halo::before,
   .group:hover .martin-neon,
   .group:hover .pokedex-ball-wrap svg,
   .group:hover .pokedex-ball-wrap::after,
+  .pokedex-led,
   .myshelf-spine {
     animation: none !important;
   }

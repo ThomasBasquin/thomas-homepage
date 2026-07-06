@@ -19,7 +19,10 @@ export const PokedexCard = ({ project }: PokedexCardProps) => {
           <span className="pokedex-ball-wrap">
             <ProjectIcon name={project.icon} className="h-7 w-7" />
           </span>
-          <span className="font-press-start pokedex-badge text-[0.6rem]">Nº001</span>
+          <span className="font-press-start pokedex-badge text-[0.6rem]">
+            <span className="pokedex-led" aria-hidden="true" />
+            Nº001
+          </span>
         </div>
       }
     />

@@ -77,37 +77,41 @@ const ICONS: Record<ProjectIconName, IconDef> = {
 interface ProjectIconProps {
   name: ProjectIconName;
   className?: string;
+  solidColor?: string;
 }
 
-export const ProjectIcon = ({ name, className }: ProjectIconProps) => {
+export const ProjectIcon = ({ name, className, solidColor }: ProjectIconProps) => {
   const { from, to, paths } = ICONS[name];
   const gradientId = `icon-gradient-${name}`;
+  const glowColor = solidColor ?? from;
 
   return (
     <svg
       viewBox="0 0 24 24"
       fill="none"
-      stroke={`url(#${gradientId})`}
+      stroke={solidColor ?? `url(#${gradientId})`}
       strokeWidth={1.8}
       strokeLinecap="round"
       strokeLinejoin="round"
       aria-hidden="true"
-      style={{ "--icon-glow": `${from}99` } as React.CSSProperties}
+      style={{ "--icon-glow": `${glowColor}99` } as React.CSSProperties}
       className={`[filter:drop-shadow(0_0_0px_var(--icon-glow))] group-hover:[filter:drop-shadow(0_0_10px_var(--icon-glow))] transition-[filter] duration-500 ${
         className ?? ""
       }`}>
-      <defs>
-        <linearGradient
-          id={gradientId}
-          x1="0"
-          y1="0"
-          x2="24"
-          y2="24"
-          gradientUnits="userSpaceOnUse">
-          <stop stopColor={from} />
-          <stop offset="1" stopColor={to} />
-        </linearGradient>
-      </defs>
+      {!solidColor && (
+        <defs>
+          <linearGradient
+            id={gradientId}
+            x1="0"
+            y1="0"
+            x2="24"
+            y2="24"
+            gradientUnits="userSpaceOnUse">
+            <stop stopColor={from} />
+            <stop offset="1" stopColor={to} />
+          </linearGradient>
+        </defs>
+      )}
       {paths}
     </svg>
   );

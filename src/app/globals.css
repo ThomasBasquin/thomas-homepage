@@ -48,6 +48,10 @@ body {
   font-family: var(--font-press-start), monospace;
 }
 
+.font-bungee {
+  font-family: var(--font-bungee), system-ui, sans-serif;
+}
+
 .font-bold-force {
   font-weight: 700 !important;
 }
