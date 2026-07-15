@@ -1,48 +1,54 @@
 "use client";
 
-import { useAnimations } from "@/hooks/useAnimations";
-import { Background } from "@/components/Background";
-import { Header } from "@/components/Header";
-import { ProjectsGrid } from "@/components/ProjectsGrid";
-import "@/styles/animations.css";
-import "@/styles/components.css";
-import "@/styles/projectCards.css";
+import dynamic from "next/dynamic";
+import { useEffect, useState } from "react";
+import { TOTAL_PAGES } from "@/lib/journey";
+import { initSmoothScroll } from "@/lib/scroll";
+import Loader from "@/components/dom/Loader";
+import Navbar from "@/components/dom/Navbar";
+import HeroOverlay from "@/components/dom/HeroOverlay";
+import SectionOverlays from "@/components/dom/SectionOverlays";
+import ProjectModal from "@/components/dom/ProjectModal";
+import HUDRail from "@/components/dom/HUDRail";
+import SocialRail from "@/components/dom/SocialRail";
+import ImpactFlash from "@/components/dom/ImpactFlash";
+import CustomCursor from "@/components/dom/CustomCursor";
+
+const Experience = dynamic(() => import("@/components/canvas/Experience"), {
+  ssr: false,
+});
 
 export default function Home() {
-  const { mousePosition, particles, scrollY } = useAnimations();
+  const [fontsReady, setFontsReady] = useState(false);
+
+  useEffect(() => {
+    const cleanup = initSmoothScroll();
+    let alive = true;
+    document.fonts.ready.then(() => alive && setFontsReady(true));
+    return () => {
+      alive = false;
+      cleanup();
+    };
+  }, []);
 
   return (
-    <div
-      className="min-h-[100lvh] bg-gradient-to-br from-black via-gray-900 to-black text-white relative"
-    >
-      {/* Grid Overlay */}
-      <div className="grid-overlay absolute inset-0 pointer-events-none z-20" />
+    <main className="relative">
+      {/* Scroll runway — the journey lives in this scroll distance */}
+      <div style={{ height: `${TOTAL_PAGES * 100}vh` }} />
 
-      {/* Background Effects */}
-      <Background
-        mousePosition={mousePosition}
-        particles={particles}
-        scrollY={scrollY}
-      />
+      {/* 3D scene (fixed, behind everything) */}
+      {fontsReady && <Experience />}
 
-      {/* Main Content */}
-      <div className="relative z-10 flex flex-col items-center justify-center min-h-[100lvh] p-8">
-        <Header />
-
-        <h2 className="sr-only">Projets</h2>
-
-        <ProjectsGrid />
-
-        {/* Footer */}
-        <div className="mt-20 pb-8 text-center">
-          <div className="flex items-center justify-center gap-3 text-gray-400">
-            <span className="h-1.5 w-1.5 rounded-full bg-purple-400 shadow-[0_0_8px_2px_rgba(192,132,252,0.5)]" />
-            <span className="text-sm font-medium tracking-wide">
-              © {new Date().getFullYear()} Thomas Basquin
-            </span>
-          </div>
-        </div>
-      </div>
-    </div>
+      {/* DOM overlay */}
+      <Navbar />
+      <HeroOverlay />
+      <SectionOverlays />
+      <HUDRail />
+      <SocialRail />
+      <ProjectModal />
+      <ImpactFlash />
+      <CustomCursor />
+      <Loader />
+    </main>
   );
 }

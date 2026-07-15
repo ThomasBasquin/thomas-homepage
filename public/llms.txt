@@ -1,0 +1,23 @@
+# Thomas Basquin
+
+> Développeur web. Conçoit et développe des sites et applications web de bout en bout avec React, Next.js, Astro et TypeScript — du prototype à la mise en production.
+
+Thomas conçoit des applications web complètes — interface, données, hébergement et mise en production — avec une préférence pour les systèmes simples, rapides et maintenables. Le portfolio sur thomasbasquin.fr est une expérience 3D interactive (WebGL) ; l'intégralité du contenu texte est reprise dans les fichiers liés ci-dessous pour les modèles de langage.
+
+## Pages clés
+- [Accueil du portfolio](https://thomasbasquin.fr/) : portfolio 3D interactif avec à-propos, projets et compétences.
+- [Profil complet (Markdown)](https://thomasbasquin.fr/llms-full.txt) : bio complète et description de chaque projet en texte brut.
+
+## Projets sélectionnés
+- [MyShelf](https://myshelf.thomasbasquin.fr/) : suivi collaboratif de jeux, films, séries et animés, pensé mobile-first (PWA) — Next.js, TypeScript.
+- [Marie Wach](https://osteo.thomasbasquin.fr/) : site vitrine pour un cabinet d'ostéopathie, avec prise de rendez-vous en ligne — Astro, TypeScript, Leaflet.
+- [Quiz d'Ostéopathie](https://quiz.thomasbasquin.fr/) : application de quiz en sciences ostéopathiques — React, TypeScript, Zustand.
+- [Martin Basquin](https://martinbasquin.thomasbasquin.fr/) : portfolio créatif montage vidéo — HTML, CSS.
+- [Pokédex](https://pokedex.thomasbasquin.fr/) : encyclopédie interactive des Pokémon — Next.js, TypeScript, Tailwind.
+
+## Profils
+- [GitHub](https://github.com/ThomasBasquin)
+
+## Contact
+- Email : thomas.basquin2@gmail.com
+- Localisation : France

@@ -1,89 +1,34 @@
-# Thomas - Portfolio & Side Projects
+# Thomas Basquin — Portfolio
 
-Portfolio personnel présentant ses projets web avec une interface moderne et interactive.
+Portfolio personnel : un « voyage spatial » 3D piloté au scroll. Le visiteur pilote une fusée depuis le pas de tir à travers le système solaire ; chaque section (à propos, parcours, compétences, projets, contact) est un jalon céleste sur la trajectoire.
 
-## ✨ Fonctionnalités
+Adapté du projet open-source [AbhishekBadar/portfolio](https://github.com/AbhishekBadar/portfolio) — architecture et scène 3D d'origine, contenu et langue remplacés.
 
-- **Design glassmorphisme** avec effets de flou et transparence
-- **Animations fluides** et interactions souris/tactile
-- **Responsive design** optimisé mobile et desktop
-- **Easter eggs interactifs** cachés dans l'interface
-- **Effets visuels** : particules flottantes, grille animée, parallax
+## Stack
 
-## 🚀 Projets présentés
+- **Next.js 16** (App Router) + React 19, TypeScript strict
+- **three.js + @react-three/fiber** pour la scène 3D, **postprocessing** (bloom, aberration chromatique, vignette)
+- **Lenis** pour le smooth scroll, **motion** pour les animations DOM, **zustand** pour l'état
+- **Tailwind CSS v4**
+- Export statique (`output: "export"`) déployé par rsync (`deploy.sh`)
 
-- **Quiz Ostéo** - Application de quiz en ostéopathie (React + Vite)
-- **Portfolio Martin** - Portfolio créatif de montage vidéo
-- **Pokédex** - Encyclopédie interactive des Pokémon (Next.js + PokeAPI)
-
-## 🎮 Easter Eggs
-
-Découvrez les fonctionnalités cachées :
-
-- **Triple-click** sur "Thomas" → Affiche l'aide des Easter eggs
-- **Konami Code** (↑↑↓↓←→←→) → Mode hacker avec lignes Matrix
-- **Tape "coin"** → Canard animé qui se balade ! 🦆
-
-## 🛠️ Technologies
-
-- **Next.js 15** avec App Router et Turbopack
-- **TypeScript** pour la sécurité de type
-- **Tailwind CSS** pour le styling
-- **React 19** avec hooks personnalisés
-- **Architecture modulaire** avec composants réutilisables
-
-## 📦 Installation
+## Développement
 
 ```bash
-# Cloner le projet
-git clone [URL_DU_REPO]
-cd thomas-homepage
-
-# Installer les dépendances
-npm install
-
-# Lancer le serveur de développement
-npm run dev
+npm run dev     # serveur de dev (Turbopack)
+npm run build   # build + export statique dans out/
+./deploy.sh     # build + rsync vers /var/www/html
 ```
 
-Ouvrir [http://localhost:3000](http://localhost:3000) dans votre navigateur.
+## Contenu
 
-## 🔧 Scripts disponibles
+Tout le contenu du site (profil, parcours, compétences, projets) vit dans **`src/lib/data.ts`** — c'est le seul fichier à éditer pour changer ce que le site raconte. Les entrées marquées « À COMPLÉTER » attendent le vrai parcours professionnel.
 
-```bash
-npm run dev      # Serveur de développement avec Turbopack
-npm run build    # Build de production
-npm run start    # Serveur de production
-npm run lint     # Analyse ESLint
-```
+L'architecture complète (scroll → vol, chorégraphie caméra, textures canvas) est documentée dans `docs/CONTEXT.md`.
 
-## 📁 Structure du projet
+## Crédits assets
 
-```
-src/
-├── app/          # Pages Next.js (layout, page principal)
-├── components/   # Composants React réutilisables
-├── hooks/        # Hooks personnalisés (animations, Easter eggs)
-├── data/         # Données statiques et constantes
-├── types/        # Types TypeScript
-└── styles/       # Fichiers CSS (animations, composants)
-```
-
-## 🎨 Architecture
-
-Le projet suit une architecture Next.js modulaire avec :
-
-- **Séparation des responsabilités** : hooks pour la logique métier
-- **Composants focalisés** : chaque composant a une responsabilité unique  
-- **Styles organisés** : animations et styles séparés
-- **Performance optimisée** : throttling des événements, useCallback
-
-## 🚀 Déploiement
-
-Le projet est optimisé pour le déploiement sur [Vercel](https://vercel.com) :
-
-```bash
-npm run build  # Vérifier que le build fonctionne
-```
-
-Le déploiement se fait automatiquement via Git avec Vercel.
+- Textures de planètes — [Solar System Scope](https://www.solarsystemscope.com/textures/) (CC BY 4.0)
+- HDRI « Dikhololo Night » — [Poly Haven](https://polyhaven.com) (CC0)
+- Modèles 3D (astronaute, vaisseau) — [Quaternius Ultimate Space Kit](https://quaternius.com) (CC0)
+- Modèle ISS — [NASA 3D Resources](https://github.com/nasa/NASA-3D-Resources) (domaine public)
