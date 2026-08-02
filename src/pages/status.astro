@@ -1,0 +1,27 @@
+---
+import Base from "../layouts/Base.astro";
+import SiteHeader from "../components/SiteHeader.astro";
+import SiteFooter from "../components/SiteFooter.astro";
+import { SITE } from "../lib/site";
+---
+
+<Base
+  title={`Statut des sites — ${SITE.name}`}
+  description="Vue d'ensemble des sites et services hébergés sur mon VPS."
+  noindex
+>
+  <SiteHeader home={false} />
+  <main id="contenu">
+    <div class="status-page container">
+      <a class="back-link" href="/">← Accueil</a>
+      <h1>Statut des sites</h1>
+      <p class="status-updated" data-status-updated>Chargement…</p>
+      <ul class="status-list" data-status-list aria-live="polite"></ul>
+    </div>
+  </main>
+  <SiteFooter />
+</Base>
+
+<script>
+  import "../scripts/status-page";
+</script>
