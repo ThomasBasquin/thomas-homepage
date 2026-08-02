@@ -47,7 +47,7 @@ SITES=(
   "Pokédex|pokedex.thomasbasquin.fr|static"
   "Martin Basquin|martinbasquin.thomasbasquin.fr|static"
   "Marie Wach|mariewach.fr|static"
-  "MyShelf|myshelf.thomasbasquin.fr|unit|myshelf.service"
+  "Nook|nook.thomasbasquin.fr|unit|nook.service"
   "Code Server Titouan|stats.thomasbasquin.fr|unit|code-server@titouan.service"
   "Code Server Thomas|notes.thomasbasquin.fr|port|8080"
   "Home (5555)|home.thomasbasquin.fr|port|5555"
