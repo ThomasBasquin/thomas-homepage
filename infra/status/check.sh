@@ -47,7 +47,6 @@ SITES=(
   "Pokédex|pokedex.thomasbasquin.fr|static"
   "Martin Basquin|martinbasquin.thomasbasquin.fr|static"
   "Marie Wach|mariewach.fr|static"
-  "Quiz ostéopathie|quiz.thomasbasquin.fr|static"
   "MyShelf|myshelf.thomasbasquin.fr|unit|myshelf.service"
   "Stats (code-server)|stats.thomasbasquin.fr|unit|code-server@titouan.service"
   "Notes|notes.thomasbasquin.fr|port|8080"
@@ -55,7 +54,6 @@ SITES=(
   "Ressources|ressources.thomasbasquin.fr|port|5173 3000"
   "Browser|browser.thomasbasquin.fr|port|3010"
   "Todo|todo.thomasbasquin.fr|port|9090 2555"
-  "Ostéo Marie Wach (ancien)|osteo.thomasbasquin.fr|retired"
 )
 
 TMP_FILE="$(mktemp)"
