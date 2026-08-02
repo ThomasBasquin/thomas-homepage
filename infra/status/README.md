@@ -28,8 +28,22 @@ cat /var/www/status-data/status.json
 systemctl list-timers vps-status-check.timer
 ```
 
-## Mettre à jour la liste des sites
+## Comment la liste des sites est construite
 
-Éditer le tableau `SITES` dans `check.sh`, puis relancer le service
-(`sudo systemctl start vps-status-check.service`) — pas besoin de
+Les domaines sont découverts automatiquement depuis
+`/etc/nginx/sites-enabled/*` : un site par fichier, le domaine vient du
+premier `server_name`, et la méthode de vérification est déduite du
+`proxy_pass` (présent -> on surveille le ou les ports cibles ; absent -> site
+statique, considéré up tant que nginx tourne). Un nouveau site ajouté sur le
+VPS apparaît donc tout seul au prochain run, pas besoin de toucher au script.
+
+Deux choses restent à régler à la main dans `check.sh` :
+
+- `LABELS` : libellé affiché pour un domaine donné (sinon le domaine brut
+  sert de libellé)
+- `EXCLUDE` : domaines à ne pas afficher (ex: une redirection pure vers un
+  autre site déjà listé, comme `myshelf.thomasbasquin.fr` -> `nook`)
+
+Après une modif de `check.sh`, relancer le service pour voir l'effet tout de
+suite (`sudo systemctl start vps-status-check.service`) — pas besoin de
 réinstaller les units.
