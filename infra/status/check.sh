@@ -6,7 +6,8 @@
 # /etc/nginx/sites-enabled/*, un par fichier : le premier server_name donne
 # le domaine, les proxy_pass donnent les ports à surveiller (aucun
 # proxy_pass = site statique, considéré up tant que nginx tourne). Seuls le
-# libellé affiché et les exclusions se règlent à la main ci-dessous.
+# libellé, l'ordre d'affichage et les exclusions se règlent à la main
+# ci-dessous.
 set -euo pipefail
 
 NGINX_SITES_DIR="/etc/nginx/sites-enabled"
@@ -16,6 +17,19 @@ OUTPUT_FILE="$OUTPUT_DIR/status.json"
 # Domaines à ne pas afficher (ex: redirections pures vers un autre site listé).
 EXCLUDE=(
   "myshelf.thomasbasquin.fr" # redirige vers nook.thomasbasquin.fr
+)
+
+# Domaines connus affichés en premier, dans cet ordre. Tout domaine découvert
+# mais absent d'ORDER est ajouté ensuite, dans l'ordre de découverte.
+ORDER=(
+  "thomasbasquin.fr"
+  "mariewach.fr"
+  "martinbasquin.thomasbasquin.fr"
+  "nook.thomasbasquin.fr"
+  "pokedex.thomasbasquin.fr"
+  "notes.thomasbasquin.fr"
+  "stats.thomasbasquin.fr"
+  "ressources.thomasbasquin.fr"
 )
 
 # Libellé affiché par domaine. Absent de la table -> le domaine lui-même sert
@@ -33,10 +47,16 @@ declare -A LABELS=(
   ["browser.thomasbasquin.fr"]="Browser"
 )
 
-is_excluded() {
-  local domain="$1"
-  for d in "${EXCLUDE[@]}"; do
-    [ "$d" = "$domain" ] && return 0
+# Domaines dont le libellé n'affiche pas les ports surveillés entre parenthèses.
+NO_PORT_SUFFIX=(
+  "nook.thomasbasquin.fr"
+)
+
+contains() {
+  local needle="$1"
+  shift
+  for item in "$@"; do
+    [ "$item" = "$needle" ] && return 0
   done
   return 1
 }
@@ -58,39 +78,59 @@ check_nginx() {
   systemctl is-active --quiet nginx
 }
 
-TMP_FILE="$(mktemp)"
-trap 'rm -f "$TMP_FILE"' EXIT
+DOMAINS=()
+declare -A ENTRY_LABEL=()
+declare -A ENTRY_STATUS=()
 
-{
-  printf '{\n  "generated_at": "%s",\n  "sites": [\n' "$(date -Iseconds)"
+for f in "$NGINX_SITES_DIR"/*; do
+  [ -f "$f" ] || continue
+  domain="$(primary_domain "$f")"
+  [ -n "$domain" ] || continue
+  contains "$domain" "${EXCLUDE[@]}" && continue
 
-  first=1
-  for f in "$NGINX_SITES_DIR"/*; do
-    [ -f "$f" ] || continue
-    domain="$(primary_domain "$f")"
-    [ -n "$domain" ] || continue
-    is_excluded "$domain" && continue
+  mapfile -t ports < <(proxy_ports "$f")
+  label="${LABELS[$domain]:-$domain}"
 
-    mapfile -t ports < <(proxy_ports "$f")
-    label="${LABELS[$domain]:-$domain}"
-
-    if [ "${#ports[@]}" -eq 0 ]; then
-      check_nginx && status=up || status=down
-    else
-      status=up
-      for p in "${ports[@]}"; do
-        check_port "$p" || status=down
-      done
+  if [ "${#ports[@]}" -eq 0 ]; then
+    check_nginx && status=up || status=down
+  else
+    status=up
+    for p in "${ports[@]}"; do
+      check_port "$p" || status=down
+    done
+    if ! contains "$domain" "${NO_PORT_SUFFIX[@]}"; then
       ports_str="${ports[0]}"
       for ((i = 1; i < ${#ports[@]}; i++)); do
         ports_str+=", ${ports[i]}"
       done
       label="$label ($ports_str)"
     fi
+  fi
 
+  DOMAINS+=("$domain")
+  ENTRY_LABEL["$domain"]="$label"
+  ENTRY_STATUS["$domain"]="$status"
+done
+
+PRINT_ORDER=()
+for d in "${ORDER[@]}"; do
+  contains "$d" "${DOMAINS[@]}" && PRINT_ORDER+=("$d")
+done
+for d in "${DOMAINS[@]}"; do
+  contains "$d" "${PRINT_ORDER[@]}" || PRINT_ORDER+=("$d")
+done
+
+TMP_FILE="$(mktemp)"
+trap 'rm -f "$TMP_FILE"' EXIT
+
+{
+  printf '{\n  "generated_at": "%s",\n  "sites": [\n' "$(date -Iseconds)"
+  first=1
+  for d in "${PRINT_ORDER[@]}"; do
     [ "$first" -eq 1 ] || printf ',\n'
     first=0
-    printf '    {"label": "%s", "domain": "%s", "status": "%s"}' "$label" "$domain" "$status"
+    printf '    {"label": "%s", "domain": "%s", "status": "%s"}' \
+      "${ENTRY_LABEL[$d]}" "$d" "${ENTRY_STATUS[$d]}"
   done
   printf '\n  ]\n}\n'
 } > "$TMP_FILE"
