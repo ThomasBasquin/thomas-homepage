@@ -48,12 +48,11 @@ SITES=(
   "Martin Basquin|martinbasquin.thomasbasquin.fr|static"
   "Marie Wach|mariewach.fr|static"
   "MyShelf|myshelf.thomasbasquin.fr|unit|myshelf.service"
-  "Stats (code-server)|stats.thomasbasquin.fr|unit|code-server@titouan.service"
-  "Notes|notes.thomasbasquin.fr|port|8080"
-  "Home|home.thomasbasquin.fr|port|5555"
-  "Ressources|ressources.thomasbasquin.fr|port|5173 3000"
+  "Code Server Titouan|stats.thomasbasquin.fr|unit|code-server@titouan.service"
+  "Code Server Thomas|notes.thomasbasquin.fr|port|8080"
+  "Home (5555)|home.thomasbasquin.fr|port|5555"
+  "Ressources (5173, 3000)|ressources.thomasbasquin.fr|port|5173 3000"
   "Browser|browser.thomasbasquin.fr|port|3010"
-  "Todo|todo.thomasbasquin.fr|port|9090 2555"
 )
 
 TMP_FILE="$(mktemp)"
