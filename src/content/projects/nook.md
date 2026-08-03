@@ -5,34 +5,30 @@ description: "Suivi collaboratif de jeux, films, séries et animés, pensé mobi
 role: "Conception, design et développement"
 stack: ["Next.js", "TypeScript", "PWA"]
 accent: "#3b5bff"
+device: "phone"
 year: 2025
 links:
   demo: "https://nook.thomasbasquin.fr/"
 media:
-  poster: "/media/nook/poster.svg"
+  poster: "/media/nook/poster.webp"
   video:
     webm: "/media/nook/loop.webm"
+    mp4: "/media/nook/loop.mp4"
   gallery:
-    - "/media/nook/capture-1.svg"
-    - "/media/nook/capture-2.svg"
+    - "/media/nook/capture-1.webp"
+    - "/media/nook/capture-2.webp"
 featured: true
 order: 1
 ---
 
-## Contexte
+## Ce que fait l'application
 
-<!-- PLACEHOLDER : texte plausible à relire et personnaliser -->
+Nook rassemble dans une même bibliothèque ce qu'on joue, regarde et suit — jeux, films, séries, animés — au lieu d'une application par type de média. Chaque entrée porte son statut de progression, et les listes se partagent entre plusieurs personnes.
 
-Entre les jeux en cours, les séries à reprendre et les films recommandés par les proches, tout finissait éparpillé : des notes, des captures d'écran, des messages. Nook est né de ce besoin simple : un coin commun où chacun range ce qu'il regarde et ce qu'il joue.
+L'application demande un compte : tout ce qu'on y range est personnel, et le partage suppose de savoir qui range quoi.
 
-## Le problème
+## Le choix du mobile
 
-Les applications existantes traitent chaque média séparément (une pour les séries, une pour les jeux) et se partagent mal. Il fallait un seul outil, utilisable à plusieurs, assez rapide sur mobile pour être ouvert dans le canapé, et qui fonctionne même sans réseau.
+Nook est d'abord une application de canapé : on l'ouvre pour cocher un épisode, pas pour administrer un catalogue. Tout en découle.
 
-## La solution
-
-Une PWA mobile-first construite avec Next.js et TypeScript : listes partagées, statuts de progression, recherche par titre. L'application s'installe sur l'écran d'accueil et garde ses données consultables hors ligne. L'interface privilégie les gestes courts : ajouter, cocher, passer au suivant.
-
-## Ce que j'ai appris
-
-Faire tenir une vraie logique collaborative dans une interface simple demande plus de travail de retrait que d'ajout. Ce projet m'a aussi appris à traiter le mode hors ligne comme une contrainte de conception dès le départ, pas comme une option ajoutée à la fin.
+Elle s'installe depuis le navigateur — manifeste web, affichage `standalone`, orientation portrait verrouillée, ouverture directe sur la bibliothèque de jeux. Une fois posée sur l'écran d'accueil, plus rien ne signale un site web. L'interface est construite sur un jeu de variables CSS (surfaces, contenus, états) plutôt que sur des couleurs écrites en dur, ce qui laisse le thème sombre et les états actifs cohérents d'un écran à l'autre.

@@ -5,34 +5,32 @@ description: "Site vitrine pour un cabinet d'ostéopathie, avec prise de rendez-
 role: "Design, développement et mise en ligne"
 stack: ["Astro", "TypeScript", "Leaflet"]
 accent: "#57c785"
+device: "browser"
 year: 2024
 links:
   demo: "https://mariewach.fr/"
 media:
-  poster: "/media/marie-wach/poster.svg"
+  poster: "/media/marie-wach/poster.webp"
   video:
     webm: "/media/marie-wach/loop.webm"
+    mp4: "/media/marie-wach/loop.mp4"
   gallery:
-    - "/media/marie-wach/capture-1.svg"
-    - "/media/marie-wach/capture-2.svg"
+    - "/media/marie-wach/capture-1.webp"
+    - "/media/marie-wach/capture-2.webp"
 featured: false
 order: 2
 ---
 
-## Contexte
+## Le besoin du cabinet
 
-<!-- PLACEHOLDER : texte plausible à relire et personnaliser -->
+Un cabinet d'ostéopathie à Dieffenbach-au-Val avait besoin de trois choses : être trouvé, être situé, être joignable pour un rendez-vous. Le reste est du bruit.
 
-Un cabinet d'ostéopathie avait besoin d'une présence en ligne claire : présenter la praticienne, les soins proposés, les tarifs, et surtout permettre aux patients de prendre rendez-vous sans téléphoner.
+Le site tient donc sur peu d'écrans : ce que fait la praticienne, où se trouve le cabinet — carte Leaflet, pas d'iframe tierce à charger — et la prise de rendez-vous. La mention que l'ostéopathie ne se substitue pas à un suivi médical y figure explicitement : un site de santé engage celle dont il porte le nom.
 
-## Le problème
+## Le thème circadien
 
-Le site devait inspirer confiance à des patients de tous âges, se consulter d'abord sur téléphone, et rester très rapide même sur une connexion moyenne. Il fallait aussi le rendre facile à faire évoluer sans intervention technique à chaque changement d'horaires.
+Le site n'a pas de bouton « mode sombre » comme réglage principal. Il est clair entre le lever et le coucher du soleil, sombre la nuit.
 
-## La solution
+Les heures ne viennent pas d'une API : elles sont calculées à partir des coordonnées du cabinet, équation du temps comprise. Le script est inliné dans le `<head>` et s'exécute avant le premier rendu, pour qu'aucun flash de thème ne soit visible au chargement. Une bascule manuelle reste possible, retenue le temps de la visite.
 
-Un site statique Astro, quasi sans JavaScript, qui charge instantanément. La prise de rendez-vous s'appuie sur un service en ligne intégré au site ; une carte Leaflet situe le cabinet. Le contenu est structuré pour que les informations pratiques (adresse, tarifs, horaires) se mettent à jour en un seul endroit.
-
-## Ce que j'ai appris
-
-Travailler pour une vraie cliente change les priorités : la lisibilité et la confiance passent avant toute prouesse. C'est aussi ce projet qui m'a fait adopter Astro pour les sites de contenu, pour son rendu statique et son coût de maintenance minimal.
+C'est le genre de détail que personne ne remarque tant qu'il fonctionne — ce qui est exactement le but.

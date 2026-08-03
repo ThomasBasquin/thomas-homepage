@@ -1,0 +1,22 @@
+---
+import Base from "../layouts/Base.astro";
+import SiteHeader from "../components/SiteHeader.astro";
+import SiteFooter from "../components/SiteFooter.astro";
+---
+
+<Base title="Page introuvable — Thomas Basquin" noindex>
+  <SiteHeader home={false} />
+  <main id="contenu">
+    <div class="notfound container">
+      <h1>404</h1>
+      <p>
+        Cette page n'existe pas. Ou alors elle n'est pas encore passée en
+        production, ce qui arrive aux meilleures.
+      </p>
+      <a class="btn btn--solid" href="/">Retour à l'accueil</a>
+    </div>
+  </main>
+  <div class="container grid outro-footer">
+    <SiteFooter home={false} />
+  </div>
+</Base>

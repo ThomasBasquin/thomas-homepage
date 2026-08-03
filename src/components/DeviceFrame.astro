@@ -1,0 +1,61 @@
+---
+/**
+ * Cadre d'appareil dessiné en CSS — aucune image de châssis, donc net à
+ * n'importe quelle densité d'écran et gratuit en octets.
+ */
+
+import { versioned } from "../lib/asset";
+
+interface Props {
+  kind: "phone" | "browser";
+  poster: string;
+  alt: string;
+  video?: { webm?: string; mp4?: string };
+  url?: string;
+  /** Vrai pour la première vignette de la page : c'est elle le LCP. */
+  eager?: boolean;
+}
+
+const { kind, poster, alt, video, url, eager = false } = Astro.props;
+
+const host = url ? new URL(url).host.replace(/^www\./, "") : undefined;
+const hasVideo = Boolean(video?.webm || video?.mp4);
+// Dimensions réelles produites par scripts/capture.mjs.
+const size = kind === "phone" ? { w: 780, h: 1688 } : { w: 1600, h: 1000 };
+---
+
+<div class:list={["device", `device--${kind}`]}>
+  {kind === "browser" && (
+    <div class="device-bar" aria-hidden="true">
+      <span class="device-dots"><i /><i /><i /></span>
+      <span class="device-url">{host}</span>
+    </div>
+  )}
+  <div class="device-screen">
+    <img
+      src={versioned(poster)}
+      alt={alt}
+      width={size.w}
+      height={size.h}
+      loading={eager ? "eager" : "lazy"}
+      fetchpriority={eager ? "high" : "auto"}
+      decoding="async"
+    />
+    {hasVideo && (
+      <video
+        muted
+        loop
+        playsinline
+        preload="none"
+        aria-hidden="true"
+        tabindex="-1"
+        width={size.w}
+        height={size.h}
+        data-lazy
+      >
+        {video?.webm && <source data-src={versioned(video.webm)} type="video/webm" />}
+        {video?.mp4 && <source data-src={versioned(video.mp4)} type="video/mp4" />}
+      </video>
+    )}
+  </div>
+</div>

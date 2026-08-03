@@ -1,0 +1,24 @@
+---
+import { SITE } from "../lib/site";
+
+interface Props {
+  home?: boolean;
+}
+
+const { home = true } = Astro.props;
+const year = new Date().getFullYear();
+---
+
+<footer class="site-footer">
+  <div class="grid micro">
+    <p class="foot-left">
+      © {year} {SITE.name} — fait main avec Astro. Pas de cookies, pas de
+      traqueurs.
+    </p>
+    <nav class="foot-right" aria-label="Liens de pied de page">
+      <a href={SITE.github} rel="me noopener" target="_blank">GitHub</a>
+      <a href="/status">Statut des sites</a>
+      <a href={home ? "#haut" : "/"}>Remonter</a>
+    </nav>
+  </div>
+</footer>

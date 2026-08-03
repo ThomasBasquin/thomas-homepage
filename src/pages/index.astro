@@ -1,0 +1,84 @@
+---
+import { getCollection } from "astro:content";
+import Base from "../layouts/Base.astro";
+import SiteHeader from "../components/SiteHeader.astro";
+import SiteFooter from "../components/SiteFooter.astro";
+import ProjectShowcase from "../components/ProjectShowcase.astro";
+import { accentRoles } from "../lib/colors";
+import { SITE, ABOUT } from "../lib/site";
+
+const projects = (await getCollection("projects")).sort(
+  (a, b) => a.data.order - b.data.order
+);
+---
+
+<Base>
+  <SiteHeader />
+  <main id="contenu">
+    <section class="hero container" id="haut" aria-label="Introduction">
+      <div class="grid hero-head">
+        <h1 class="hero-name"><span>Thomas</span><span>Basquin</span></h1>
+        <p class="hero-lede">
+          <strong>{SITE.role}.</strong> Je conçois des applications de bout en bout,
+          du prototype à la mise en production.
+        </p>
+      </div>
+      <ol class="hero-index">
+        {projects.map((project, i) => {
+          const roles = accentRoles(project.data.accent);
+          return (
+            <li>
+              <a
+                href={`#projet-${project.id}`}
+                style={`--accent: ${roles.accent}; --accent-ink: ${roles.ink};`}
+              >
+                <span class="idx-num">{String(i + 1).padStart(2, "0")}</span>
+                <span class="idx-name">{project.data.title}</span>
+                <span class="idx-meta">
+                  <span class="idx-stack">{project.data.stack.join(" · ")}</span>
+                  <span class="idx-year">{project.data.year}</span>
+                </span>
+              </a>
+            </li>
+          );
+        })}
+      </ol>
+    </section>
+
+    {projects.map((project, i) => (
+      <ProjectShowcase project={project} index={i} />
+    ))}
+
+    <section class="about container grid" id="a-propos" aria-labelledby="apropos-titre">
+      <h2 id="apropos-titre">À propos</h2>
+      <div class="about-prose">
+        {ABOUT.paragraphs.map((paragraph) => <p>{paragraph}</p>)}
+      </div>
+      <dl class="practices" aria-label="Ce que je pratique au quotidien">
+        {ABOUT.practices.map(({ label, items }) => (
+          <div>
+            <dt class="micro">{label}</dt>
+            <dd>{items}</dd>
+          </div>
+        ))}
+      </dl>
+    </section>
+
+    <section class="outro container grid" id="contact" aria-labelledby="contact-titre">
+      <h2 id="contact-titre">Contact</h2>
+      <div class="outro-body">
+        <p>Un projet, une question, une opportunité ? Le plus simple est de m'écrire.</p>
+        <a class="outro-mail" href={`mailto:${SITE.email}`}>{SITE.email}</a>
+        <a class="btn" href={SITE.github} rel="me noopener" target="_blank">
+          GitHub <span aria-hidden="true">↗</span>
+        </a>
+      </div>
+      <SiteFooter />
+    </section>
+  </main>
+</Base>
+
+<script>
+  import "../scripts/project-video";
+  import "../scripts/section-counter";
+</script>

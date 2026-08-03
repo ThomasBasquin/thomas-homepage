@@ -13,13 +13,15 @@ import { SITE } from "../lib/site";
   <SiteHeader home={false} />
   <main id="contenu">
     <div class="status-page container">
-      <a class="back-link" href="/">← Accueil</a>
+      <a class="back-link micro" href="/">← Accueil</a>
       <h1>Statut des sites</h1>
       <p class="status-updated" data-status-updated>Chargement…</p>
       <ul class="status-list" data-status-list aria-live="polite"></ul>
     </div>
   </main>
-  <SiteFooter />
+  <div class="container grid outro-footer">
+    <SiteFooter home={false} />
+  </div>
 </Base>
 
 <script>

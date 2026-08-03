@@ -1,0 +1,72 @@
+---
+import type { CollectionEntry } from "astro:content";
+import { accentRoles } from "../lib/colors";
+import DeviceFrame from "./DeviceFrame.astro";
+
+interface Props {
+  project: CollectionEntry<"projects">;
+  index: number;
+}
+
+const { project, index } = Astro.props;
+const { title, tagline, description, role, stack, year, links, media, accent, device } =
+  project.data;
+
+const roles = accentRoles(accent);
+const num = String(index + 1).padStart(2, "0");
+const style = `--accent: ${roles.accent}; --accent-ink: ${roles.ink}; --accent-deep: ${roles.deep};`;
+const titleId = `projet-${project.id}-titre`;
+const alt =
+  device === "phone"
+    ? `${title} sur un écran de téléphone, capturé sur le site en ligne`
+    : `${title} dans un navigateur, capturé sur le site en ligne`;
+---
+
+<section
+  class="showcase"
+  id={`projet-${project.id}`}
+  data-side={index % 2 === 0 ? "right" : "left"}
+  data-showcase={num}
+  style={style}
+  aria-labelledby={titleId}
+>
+  <div class="container grid">
+    <div class="showcase-text">
+      <p class="showcase-num micro">{num}</p>
+      <h2 id={titleId}>{title}</h2>
+      <p class="showcase-tagline">{tagline}</p>
+      <p class="showcase-desc">{description}</p>
+      <dl class="showcase-meta">
+        <div>
+          <dt class="micro">Rôle</dt>
+          <dd>{role}</dd>
+        </div>
+        <div>
+          <dt class="micro">Stack</dt>
+          <dd>{stack.join(" · ")}</dd>
+        </div>
+        <div>
+          <dt class="micro">Année</dt>
+          <dd>{year}</dd>
+        </div>
+      </dl>
+      <p class="showcase-links">
+        <a class="btn btn--solid" href={`/projets/${project.id}`}>Étude de cas</a>
+        {links.demo && (
+          <a class="btn" href={links.demo} target="_blank" rel="noopener">
+            Voir le site <span aria-hidden="true">↗</span>
+          </a>
+        )}
+      </p>
+    </div>
+    <div class="showcase-device">
+      <DeviceFrame
+        kind={device}
+        poster={media.poster}
+        video={media.video}
+        url={links.demo}
+        alt={alt}
+      />
+    </div>
+  </div>
+</section>

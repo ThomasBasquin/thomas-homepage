@@ -1,0 +1,25 @@
+---
+import { SITE } from "../lib/site";
+
+interface Props {
+  /** Préfixe des ancres — "" sur l'accueil, "/" depuis les autres pages. */
+  home?: boolean;
+}
+
+const { home = true } = Astro.props;
+const anchor = (id: string) => (home ? `#${id}` : `/#${id}`);
+---
+
+<header class="site-header" data-header>
+  <div class="container">
+    <a class="site-logo" href={home ? "#haut" : "/"} aria-label={SITE.name}>
+      <span class="logo-long">{SITE.name}</span>
+      <span class="logo-short">TB</span>
+    </a>
+    <p class="header-counter micro" data-counter aria-hidden="true"></p>
+    <nav class="header-links micro" aria-label="Navigation principale">
+      <a href={anchor("a-propos")}>À propos</a>
+      <a href={anchor("contact")}>Contact</a>
+    </nav>
+  </div>
+</header>

@@ -1,0 +1,137 @@
+---
+import { getCollection, render } from "astro:content";
+import type { CollectionEntry } from "astro:content";
+import Base from "../../layouts/Base.astro";
+import SiteHeader from "../../components/SiteHeader.astro";
+import SiteFooter from "../../components/SiteFooter.astro";
+import DeviceFrame from "../../components/DeviceFrame.astro";
+import { accentRoles } from "../../lib/colors";
+import { versioned } from "../../lib/asset";
+import { SITE } from "../../lib/site";
+
+export async function getStaticPaths() {
+  const projects = (await getCollection("projects")).sort(
+    (a, b) => a.data.order - b.data.order
+  );
+  return projects.map((project, i) => ({
+    params: { slug: project.id },
+    props: {
+      project,
+      prev: projects[(i - 1 + projects.length) % projects.length],
+      next: projects[(i + 1) % projects.length],
+    },
+  }));
+}
+
+interface Props {
+  project: CollectionEntry<"projects">;
+  prev: CollectionEntry<"projects">;
+  next: CollectionEntry<"projects">;
+}
+
+const { project, prev, next } = Astro.props;
+const { title, tagline, description, role, stack, year, links, media, device } =
+  project.data;
+const accent = accentRoles(project.data.accent);
+const { Content } = await render(project);
+
+const alt =
+  device === "phone"
+    ? `${title} sur un écran de téléphone, capturé sur le site en ligne`
+    : `${title} dans un navigateur, capturé sur le site en ligne`;
+---
+
+<Base title={`${title} — ${SITE.name}`} description={description} accent={accent}>
+  <Fragment slot="head">
+    <link
+      rel="preload"
+      as="image"
+      href={versioned(media.poster)}
+      fetchpriority="high"
+    />
+  </Fragment>
+  <SiteHeader home={false} />
+  <main id="contenu">
+    <article>
+      <header class="proj-head container grid">
+        <a class="back-link micro" href="/">← Tous les projets</a>
+        <h1>{title}</h1>
+        <p class="proj-tagline">{tagline}</p>
+        <div class="proj-device">
+          <DeviceFrame
+            kind={device}
+            poster={media.poster}
+            url={links.demo}
+            alt={alt}
+            eager
+          />
+        </div>
+        <dl class="proj-meta">
+          <div>
+            <dt class="micro">Rôle</dt>
+            <dd>{role}</dd>
+          </div>
+          <div>
+            <dt class="micro">Stack</dt>
+            <dd>{stack.join(" · ")}</dd>
+          </div>
+          <div>
+            <dt class="micro">Année</dt>
+            <dd>{year}</dd>
+          </div>
+          {(links.demo || links.code) && (
+            <div>
+              <dt class="micro">Liens</dt>
+              <dd>
+                {links.demo && (
+                  <a href={links.demo} rel="noopener" target="_blank">Voir le site ↗</a>
+                )}
+                {links.demo && links.code && " · "}
+                {links.code && (
+                  <a href={links.code} rel="noopener" target="_blank">Code source ↗</a>
+                )}
+              </dd>
+            </div>
+          )}
+        </dl>
+      </header>
+
+      <div class="container grid">
+        <div class="proj-body">
+          <Content />
+        </div>
+
+        {media.gallery.length > 0 && (
+          <div class="proj-gallery">
+            {media.gallery.map((src, i) => (
+              <figure>
+                <img
+                  src={versioned(src)}
+                  alt={`${title}, capture ${i + 1} sur ${media.gallery.length}`}
+                  width={device === "phone" ? 780 : 1600}
+                  height={device === "phone" ? 1688 : 1000}
+                  loading="lazy"
+                  decoding="async"
+                />
+              </figure>
+            ))}
+          </div>
+        )}
+
+        <nav class="proj-nav" aria-label="Autres projets">
+          <a href={`/projets/${prev.id}`} rel="prev">
+            <span class="micro">← Projet précédent</span>
+            <span class="nav-title">{prev.data.title}</span>
+          </a>
+          <a class="nav-next" href={`/projets/${next.id}`} rel="next">
+            <span class="micro">Projet suivant →</span>
+            <span class="nav-title">{next.data.title}</span>
+          </a>
+        </nav>
+      </div>
+    </article>
+  </main>
+  <div class="container grid outro-footer">
+    <SiteFooter home={false} />
+  </div>
+</Base>

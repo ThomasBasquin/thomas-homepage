@@ -26,51 +26,41 @@
 }
 
 /* ==========================================================================
-   Jetons — palette « nuit d'atelier »
+   Jetons
    ========================================================================== */
 
 :root {
-  /* Palette nommée */
-  --noir: oklch(12% 0 0);
-  --carbone: oklch(16.5% 0.002 150);
-  --graphite: oklch(27% 0.004 150);
-  --brume: oklch(72% 0.007 150);
-  --craie: oklch(94% 0.004 150);
-  --mousse: oklch(76% 0.125 150);
+  /* Neutres — froids, très sombres : l'écran du produit doit être l'objet
+     le plus lumineux de la page. */
+  --bg: oklch(10% 0.004 265);
+  --surface: oklch(13.5% 0.005 265);
+  --line: oklch(24% 0.008 265);
+  --line-soft: oklch(18% 0.006 265);
+  --ink: oklch(94% 0.003 265);
+  --ink-2: oklch(64% 0.008 265);
 
-  /* Rôles sémantiques */
-  --bg: var(--noir);
-  --surface: var(--carbone);
-  --line: var(--graphite);
-  --ink: var(--craie);
-  --ink-2: var(--brume);
-
-  /* Fil conducteur — surchargé par page/projet (dérivées calculées au build) */
+  /* Fil conducteur — surchargé par projet, dérivées calculées au build. */
   --accent: #3fae6a;
-  --accent-ink: var(--mousse);
+  --accent-ink: oklch(76% 0.125 150);
   --accent-deep: oklch(22% 0.05 150);
 
-  /* Typographie */
   --font-display: "Archivo", system-ui, sans-serif;
   --font-body: "Hanken Grotesk", system-ui, sans-serif;
   --font-mono: ui-monospace, "Cascadia Mono", "JetBrains Mono", Menlo, Consolas,
     monospace;
 
-  --fs-hero: clamp(2.75rem, 1.6rem + 7.2vw, 6rem);
-  --fs-h2: clamp(1.9rem, 1.35rem + 2.6vw, 3rem);
-  --fs-h3: clamp(1.3rem, 1.15rem + 0.75vw, 1.65rem);
-  --fs-lg: clamp(1.125rem, 1.05rem + 0.4vw, 1.3rem);
-  --fs-base: clamp(1rem, 0.96rem + 0.2vw, 1.0625rem);
-  --fs-sm: 0.9rem;
-  --fs-xs: 0.78rem;
+  /* Échelle volontairement trouée : trois crans nets plutôt qu'une rampe. */
+  --fs-display: clamp(3rem, 1.6rem + 6.2vw, 7rem);
+  --fs-title: clamp(2.25rem, 1.6rem + 2.9vw, 4rem);
+  --fs-lead: clamp(1.1rem, 1rem + 0.55vw, 1.45rem);
+  --fs-body: clamp(1rem, 0.97rem + 0.15vw, 1.0625rem);
+  --fs-micro: 0.75rem;
 
-  /* Rythme */
-  --section-pad: clamp(5.5rem, 14vh, 9.5rem);
-  --gutter: clamp(1.25rem, 4vw, 2.5rem);
-  --radius: 14px;
+  --gutter: clamp(1.25rem, 3.5vw, 2.5rem);
+  --band: clamp(4.5rem, 11vh, 8rem);
+  --radius: 12px;
 
-  /* Plans */
-  --z-header: 10;
+  --z-header: 20;
   --z-skip: 100;
 }
 
@@ -101,19 +91,19 @@ body {
   background: var(--bg);
   color: var(--ink);
   font-family: var(--font-body);
-  font-size: var(--fs-base);
-  line-height: 1.65;
+  font-size: var(--fs-body);
+  line-height: 1.6;
   font-optical-sizing: auto;
 }
 
 h1,
 h2,
-h3,
-h4 {
+h3 {
   font-family: var(--font-display);
-  line-height: 1.12;
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: -0.025em;
   margin: 0;
-  text-wrap: balance;
 }
 
 p {
@@ -123,16 +113,15 @@ p {
 img,
 video {
   max-width: 100%;
-  height: auto;
   display: block;
 }
 
 a {
   color: inherit;
   text-decoration-thickness: 1px;
-  text-underline-offset: 0.2em;
-  text-decoration-color: color-mix(in oklab, var(--accent-ink) 55%, transparent);
-  transition: color 160ms ease-out, text-decoration-color 160ms ease-out;
+  text-underline-offset: 0.22em;
+  text-decoration-color: color-mix(in oklab, var(--accent-ink) 45%, transparent);
+  transition: color 150ms ease-out, text-decoration-color 150ms ease-out;
 }
 
 a:hover {
@@ -148,16 +137,40 @@ a:hover {
 
 ::selection {
   background: var(--accent-ink);
-  color: var(--noir);
+  color: var(--bg);
 }
 
 [id] {
-  scroll-margin-top: 4.5rem;
+  scroll-margin-top: 5rem;
+}
+
+/* Les lueurs d'accent débordent volontairement de leur cellule ; `clip` les
+   contient sans créer de conteneur de défilement, contrairement à `hidden`
+   qui casserait l'en-tête collant. */
+main {
+  overflow-x: clip;
 }
 
 .container {
-  width: min(100% - 2 * var(--gutter), 72rem);
+  width: min(100% - 2 * var(--gutter), 84rem);
   margin-inline: auto;
+}
+
+/* La grille éditoriale : tout se cale dessus, rien n'est centré par défaut. */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: var(--gutter);
+}
+
+@media (max-width: 60rem) {
+  .grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .grid > * {
+    grid-column: 1 / -1 !important;
+  }
 }
 
 .visually-hidden {
@@ -183,7 +196,7 @@ a:hover {
   border: 1px solid var(--line);
   border-radius: 8px;
   font-family: var(--font-mono);
-  font-size: var(--fs-xs);
+  font-size: var(--fs-micro);
   text-decoration: none;
   transform: translateY(-200%);
 }
@@ -192,490 +205,673 @@ a:hover {
   transform: none;
 }
 
+/* Libellé technique — la seule marque « développeur » de la page. */
+.micro {
+  font-family: var(--font-mono);
+  font-size: var(--fs-micro);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+}
+
 /* ==========================================================================
-   En-tête
+   En-tête collant
    ========================================================================== */
 
 .site-header {
-  position: absolute;
-  inset-inline: 0;
+  position: sticky;
   top: 0;
   z-index: var(--z-header);
-  padding-block: 1.4rem;
+  background: var(--bg);
+  border-bottom: 1px solid transparent;
+  transition: border-color 200ms ease-out;
+}
+
+.site-header.is-stuck {
+  border-bottom-color: var(--line-soft);
 }
 
 .site-header .container {
   display: flex;
-  align-items: baseline;
+  align-items: center;
   justify-content: space-between;
-  gap: 1.5rem;
+  gap: 1rem;
+  height: 3.5rem;
 }
 
 .site-logo {
   font-family: var(--font-display);
-  font-weight: 700;
-  font-stretch: 110%;
+  font-weight: 600;
   font-size: 0.95rem;
-  letter-spacing: 0.015em;
+  letter-spacing: -0.01em;
   text-decoration: none;
-  color: var(--ink);
+  white-space: nowrap;
 }
 
-.site-logo:hover {
-  color: var(--accent-ink);
+.header-counter {
+  font-variant-numeric: tabular-nums;
+  opacity: 0;
+  transition: opacity 250ms ease-out;
 }
 
-.site-nav {
+.site-header.is-stuck .header-counter {
+  opacity: 1;
+}
+
+.header-links {
   display: flex;
-  gap: clamp(1rem, 3vw, 2rem);
+  gap: clamp(0.9rem, 2.5vw, 1.75rem);
 }
 
-.site-nav:only-child {
-  margin-left: auto;
-}
-
-.site-nav a {
-  font-size: var(--fs-sm);
-  color: var(--ink-2);
+.header-links a {
   text-decoration: none;
 }
 
-.site-nav a:hover {
-  color: var(--accent-ink);
+@media (max-width: 34rem) {
+  .header-counter {
+    display: none;
+  }
 }
 
-@media (max-width: 26rem) {
+@media (max-width: 22rem) {
   .site-logo .logo-long {
     display: none;
   }
 }
 
-@media (min-width: 26.01rem) {
+@media (min-width: 22.01rem) {
   .site-logo .logo-short {
     display: none;
   }
 }
 
 /* ==========================================================================
-   Sections
-   ========================================================================== */
-
-.section {
-  padding-block: var(--section-pad);
-}
-
-.section + .section {
-  border-top: 1px solid var(--line);
-}
-
-.section-head {
-  margin-bottom: clamp(2.5rem, 6vh, 4rem);
-  display: flex;
-  flex-wrap: wrap;
-  align-items: baseline;
-  gap: 0.75rem 2rem;
-}
-
-.section-head h2 {
-  font-size: var(--fs-h2);
-  font-weight: 720;
-  font-stretch: 112%;
-  letter-spacing: -0.015em;
-}
-
-.section-head p {
-  color: var(--ink-2);
-  font-size: var(--fs-base);
-  max-width: 44ch;
-}
-
-/* ==========================================================================
-   Hero
+   Hero — pas de bloc centré : un bandeau et un index
    ========================================================================== */
 
 .hero {
-  min-height: 100svh;
+  min-height: calc(100svh - 3.5rem);
   display: grid;
-  place-content: center;
-  justify-items: center;
-  text-align: center;
-  position: relative;
-  padding-block: 6rem 5rem;
-  overflow: clip;
+  align-content: space-between;
+  gap: clamp(3rem, 10vh, 6rem);
+  padding-block: clamp(3rem, 9vh, 6rem) clamp(2rem, 5vh, 3.5rem);
 }
 
-.hero-title {
-  position: relative;
+.hero-head {
+  align-items: end;
 }
 
-.hero-title h1 {
-  font-size: var(--fs-hero);
-  font-weight: 800;
-  font-stretch: 125%;
-  letter-spacing: -0.015em;
-  text-transform: uppercase;
-  line-height: 0.98;
-  transition: color 400ms ease-out;
+.hero-name {
+  grid-column: 1 / 8;
+  font-size: var(--fs-display);
+  font-weight: 620;
+  font-stretch: 105%;
+  line-height: 0.92;
 }
 
-/* Avant le premier rendu, un script inline pose .hero-pending : le titre
-   démarre invisible et les particules apparaissent directement. Si le module
-   ne prend jamais le relais, l'animation ré-affiche le texte après 3 s. */
-.hero-pending .hero-title h1 {
-  color: transparent;
-  animation: hero-text-return 400ms ease-out 3s forwards;
+.hero-name span {
+  display: block;
 }
 
-@keyframes hero-text-return {
-  from {
-    color: transparent;
-  }
-  to {
-    color: var(--craie);
-  }
+.hero-name span + span {
+  color: var(--ink-2);
 }
 
-.hero-title.is-particles h1 {
-  color: transparent;
-  animation: none;
+.hero-lede {
+  grid-column: 9 / 13;
+  padding-bottom: 0.5rem;
+  font-size: var(--fs-lead);
+  line-height: 1.45;
+  color: var(--ink-2);
+  text-wrap: pretty;
 }
 
-.hero-canvas {
-  position: absolute;
-  pointer-events: none;
-  opacity: 0;
-  transition: opacity 500ms ease-out;
+.hero-lede strong {
+  color: var(--ink);
+  font-weight: 500;
 }
 
-.is-particles .hero-canvas {
-  opacity: 1;
+/* L'index tient lieu de navigation : le visiteur voit le travail tout de suite. */
+.hero-index {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border-top: 1px solid var(--line);
+}
+
+.hero-index a {
+  display: grid;
+  grid-template-columns: 3ch minmax(0, 1fr) auto;
+  align-items: baseline;
+  gap: clamp(0.75rem, 3vw, 2rem);
+  padding-block: clamp(0.7rem, 1.6vh, 1.05rem);
+  border-bottom: 1px solid var(--line);
+  text-decoration: none;
+  transition: background-color 180ms ease-out;
+}
+
+.hero-index a:hover,
+.hero-index a:focus-visible {
+  background: color-mix(in oklab, var(--accent) 8%, transparent);
+}
+
+.hero-index .idx-num {
+  font-family: var(--font-mono);
+  font-size: var(--fs-micro);
+  color: var(--accent-ink);
+  font-variant-numeric: tabular-nums;
+  transition: transform 180ms ease-out;
+}
+
+/* L'indentation au survol passe par transform : animer le padding ferait
+   recalculer la mise en page de la ligne à chaque frame. */
+.hero-index a:hover .idx-num,
+.hero-index a:focus-visible .idx-num {
+  transform: translateX(0.4rem);
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .hero-title h1,
-  .hero-canvas {
+  .hero-index .idx-num {
     transition: none;
   }
 }
 
-.hero-title h1 span {
-  display: block;
+.hero-index .idx-name {
+  font-family: var(--font-display);
+  font-weight: 560;
+  font-size: clamp(1.15rem, 0.95rem + 0.9vw, 1.75rem);
+  letter-spacing: -0.02em;
 }
 
-.hero-lede {
-  margin-top: clamp(1.5rem, 4vh, 2.5rem);
-  max-width: 38ch;
-  color: var(--ink-2);
-  font-size: var(--fs-lg);
-  line-height: 1.55;
-  text-wrap: pretty;
-}
-
-.hero-scroll {
-  position: absolute;
-  bottom: clamp(1.5rem, 5vh, 3rem);
-  left: 50%;
-  transform: translateX(-50%);
+.hero-index .idx-meta {
   font-family: var(--font-mono);
-  font-size: var(--fs-xs);
+  font-size: var(--fs-micro);
   color: var(--ink-2);
-  text-decoration: none;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.6em;
-  white-space: nowrap;
+  text-align: right;
 }
 
-.hero-scroll:hover {
-  color: var(--accent-ink);
+@media (max-width: 40rem) {
+  .hero-index .idx-meta .idx-stack {
+    display: none;
+  }
 }
 
 /* ==========================================================================
-   Grille de projets
+   Cadres d'appareil — dessinés en CSS, aucune image
    ========================================================================== */
 
-.projects {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: clamp(2.5rem, 6vw, 4.5rem) clamp(1.5rem, 3vw, 2.5rem);
-}
-
-.projects > li {
-  display: contents;
-}
-
-.project-card {
-  display: block;
-  text-decoration: none;
-  color: inherit;
-}
-
-.project-card.is-featured {
-  grid-column: 1 / -1;
-}
-
-.card-media {
+.device {
   position: relative;
-  margin: 0;
-  aspect-ratio: 16 / 9;
-  border-radius: var(--radius);
-  overflow: hidden;
   background: var(--surface);
   border: 1px solid var(--line);
+  overflow: hidden;
 }
 
-.card-media video {
+.device-screen {
+  position: relative;
+  overflow: hidden;
+  background: var(--bg);
+}
+
+.device-screen img,
+.device-screen video {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
-  opacity: 0;
-  transition: opacity 250ms ease-out;
+  object-position: top center;
 }
 
-.card-media video.is-playing {
+.device-screen video {
+  opacity: 0;
+  transition: opacity 300ms ease-out;
+}
+
+.device-screen video.is-playing {
   opacity: 1;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .card-media video {
+  .device-screen video {
     display: none;
   }
 }
 
-.is-featured .card-media {
-  aspect-ratio: 16 / 9;
-}
-
-@media (min-width: 56rem) {
-  .is-featured .card-media {
-    aspect-ratio: 21 / 9;
-  }
-}
-
-.card-media img {
+/* Navigateur */
+.device--browser {
+  border-radius: var(--radius);
   width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: filter 200ms ease-out;
 }
 
-.project-card:hover .card-media img {
-  filter: brightness(1.08);
-}
-
-.card-body {
-  padding-top: 1.1rem;
-  display: grid;
-  gap: 0.35rem;
-}
-
-.card-body h3 {
-  font-size: var(--fs-h3);
-  font-weight: 660;
-  font-stretch: 108%;
-  letter-spacing: -0.01em;
-  transition: color 160ms ease-out;
-}
-
-.is-featured .card-body h3 {
-  font-size: clamp(1.6rem, 1.3rem + 1.5vw, 2.3rem);
-}
-
-.project-card:hover h3,
-.project-card:focus-visible h3 {
-  color: var(--accent-ink);
-}
-
-.card-body > p {
-  color: var(--ink-2);
-  max-width: 58ch;
-}
-
-.card-tags {
-  list-style: none;
-  margin: 0.4rem 0 0;
-  padding: 0;
+.device--browser .device-bar {
   display: flex;
-  flex-wrap: wrap;
-  align-items: baseline;
+  align-items: center;
+  gap: 0.4rem;
+  height: 2.25rem;
+  padding-inline: 0.85rem;
+  border-bottom: 1px solid var(--line);
+}
+
+.device--browser .device-dots {
+  display: flex;
+  gap: 0.35rem;
+  flex: none;
+}
+
+.device--browser .device-dots i {
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 50%;
+  background: var(--line);
+}
+
+.device--browser .device-url {
+  flex: 1 1 auto;
+  min-width: 0;
+  margin-inline: auto;
+  max-width: 24rem;
+  padding: 0.15em 0.9em;
+  border-radius: 999px;
+  background: var(--bg);
   font-family: var(--font-mono);
-  font-size: var(--fs-xs);
+  font-size: var(--fs-micro);
   color: var(--ink-2);
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
-.card-tags li + li::before {
-  content: "·";
-  margin-inline: 0.6em;
-  opacity: 0.6;
+.device--browser .device-screen {
+  aspect-ratio: 16 / 10;
 }
 
-.card-tags .card-year {
-  color: var(--accent-ink);
+/* Téléphone */
+.device--phone {
+  border-radius: 2.25rem;
+  padding: 0.6rem;
+  aspect-ratio: 390 / 844;
+  height: min(80svh, 44rem);
+  width: auto;
+  overflow: visible;
 }
 
-@media (max-width: 48rem) {
-  .projects {
-    grid-template-columns: 1fr;
+.device--phone::after {
+  content: "";
+  position: absolute;
+  top: 0.16rem;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 2.75rem;
+  height: 0.25rem;
+  border-radius: 999px;
+  background: var(--line);
+}
+
+.device--phone .device-screen {
+  height: 100%;
+  border-radius: 1.7rem;
+}
+
+/* Sous 60rem, un téléphone dessiné dans un téléphone n'a plus de sens. */
+@media (max-width: 60rem) {
+  .device--phone {
+    height: auto;
+    width: min(100%, 18rem);
+    padding: 0;
+    border-radius: var(--radius);
+    margin-inline: auto;
+  }
+
+  .device--phone::after {
+    display: none;
+  }
+
+  .device--phone .device-screen {
+    border-radius: calc(var(--radius) - 1px);
   }
 }
 
 /* ==========================================================================
-   À propos
+   Sections projet — un projet, un écran
    ========================================================================== */
 
-.about-grid {
+.showcase {
+  /* La barre collante occupe 3.5rem : sans la déduire, le contenu « centré »
+     paraît systématiquement trop bas. */
+  min-height: calc(100svh - 3.5rem);
   display: grid;
-  grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
-  gap: clamp(2.5rem, 6vw, 5rem);
-  align-items: start;
+  align-content: center;
+  padding-block: var(--band);
+  border-top: 1px solid var(--line-soft);
 }
 
-.about-prose {
-  display: grid;
-  gap: 1.1rem;
-  max-width: 62ch;
-  text-wrap: pretty;
-}
-
-.about-prose p:first-child {
-  font-size: var(--fs-lg);
-  line-height: 1.55;
-}
-
-.about-prose p + p {
-  color: var(--ink-2);
-}
-
-.practices {
-  margin: 0;
+.showcase-text {
+  grid-column: 1 / 6;
   display: grid;
   gap: 1.15rem;
-  border-top: 1px solid var(--line);
-  padding-top: 1.5rem;
+  align-content: center;
 }
 
-.practices dt {
-  font-family: var(--font-mono);
-  font-size: var(--fs-xs);
+.showcase-device {
+  grid-column: 6 / 13;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.showcase[data-side="left"] .showcase-device {
+  grid-column: 1 / 8;
+  order: -1;
+}
+
+.showcase[data-side="left"] .showcase-text {
+  grid-column: 8 / 13;
+}
+
+/* Le seul effet lumineux de la page : la couleur du projet derrière l'écran. */
+.showcase-device::before {
+  content: "";
+  position: absolute;
+  inset: -8%;
+  z-index: -1;
+  border-radius: 50%;
+  background: radial-gradient(
+    58% 52% at 50% 48%,
+    color-mix(in oklab, var(--accent) 26%, transparent),
+    transparent 72%
+  );
+  filter: blur(46px);
+  opacity: 0.55;
+  pointer-events: none;
+}
+
+.showcase-num {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
   color: var(--accent-ink);
-  margin-bottom: 0.15rem;
+  font-variant-numeric: tabular-nums;
 }
 
-.practices dd {
-  margin: 0;
-  color: var(--ink-2);
-  font-size: var(--fs-sm);
+.showcase-num::after {
+  content: "";
+  flex: 1 1 auto;
+  height: 1px;
+  background: color-mix(in oklab, var(--accent) 40%, transparent);
 }
 
-@media (max-width: 48rem) {
-  .about-grid {
-    grid-template-columns: 1fr;
-  }
+.showcase-text h2 {
+  font-size: var(--fs-title);
+  font-stretch: 102%;
 }
 
-/* ==========================================================================
-   Contact
-   ========================================================================== */
-
-.contact-inner {
-  display: grid;
-  gap: 1.75rem;
-  justify-items: start;
-}
-
-.contact-inner > p {
-  color: var(--ink-2);
-  max-width: 46ch;
-  font-size: var(--fs-lg);
-  line-height: 1.55;
+.showcase-tagline {
+  font-size: var(--fs-lead);
+  line-height: 1.35;
+  color: var(--ink);
   text-wrap: pretty;
 }
 
-.contact-mail {
-  font-family: var(--font-display);
-  font-weight: 680;
-  font-stretch: 108%;
-  font-size: clamp(1.2rem, 0.75rem + 3.2vw, 3.25rem);
-  letter-spacing: -0.015em;
-  color: var(--accent-ink);
-  text-decoration-thickness: 2px;
-  text-decoration-color: color-mix(in oklab, var(--accent-ink) 35%, transparent);
-  overflow-wrap: anywhere;
+.showcase-desc {
+  color: var(--ink-2);
+  max-width: 46ch;
+  text-wrap: pretty;
 }
 
-.contact-mail:hover {
-  text-decoration-color: var(--accent-ink);
+/* Filets portés par les cellules, jamais par le conteneur : une piste vide
+   d'auto-fit ne peut donc pas dessiner de bloc fantôme. */
+.showcase-meta {
+  margin: 0.35rem 0 0;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.1rem 1.5rem;
 }
 
-.contact-links {
+.showcase-meta > div {
+  border-top: 1px solid var(--line);
+  padding-top: 0.85rem;
+}
+
+.showcase-meta dt {
+  margin-bottom: 0.3rem;
+}
+
+@media (max-width: 30rem) {
+  .showcase-meta {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.showcase-meta dd {
+  margin: 0;
+  font-size: 0.9rem;
+  line-height: 1.4;
+}
+
+.showcase-links {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.9rem;
+  gap: 0.75rem;
+  margin-top: 0.4rem;
 }
+
+/* ==========================================================================
+   Boutons
+   ========================================================================== */
 
 .btn {
   display: inline-flex;
   align-items: center;
   gap: 0.55em;
-  padding: 0.7em 1.35em;
+  padding: 0.7em 1.25em;
   border: 1px solid var(--line);
   border-radius: 999px;
   font-family: var(--font-mono);
-  font-size: var(--fs-xs);
-  color: var(--ink);
+  font-size: var(--fs-micro);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
   text-decoration: none;
-  transition: border-color 160ms ease-out, color 160ms ease-out;
+  color: var(--ink);
+  transition: border-color 160ms ease-out, color 160ms ease-out,
+    background-color 160ms ease-out;
 }
 
 .btn:hover {
   border-color: var(--accent-ink);
   color: var(--accent-ink);
+  background: color-mix(in oklab, var(--accent) 10%, transparent);
 }
 
-/* ==========================================================================
-   Pied de page
-   ========================================================================== */
-
-.site-footer {
-  border-top: 1px solid var(--line);
-  padding-block: 2.5rem 3rem;
-  font-family: var(--font-mono);
-  font-size: var(--fs-xs);
-  color: var(--ink-2);
-}
-
-.site-footer .container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  align-items: baseline;
-  gap: 1rem 2rem;
-}
-
-.footer-links {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1.5rem;
-}
-
-.footer-links a {
-  color: var(--ink-2);
-  text-decoration: none;
-}
-
-.footer-links a:hover {
+.btn--solid {
+  border-color: var(--accent-ink);
+  background: color-mix(in oklab, var(--accent) 16%, transparent);
   color: var(--accent-ink);
 }
 
-.footer-note {
-  flex-basis: 100%;
-  margin-top: 0.5rem;
-  opacity: 0.75;
+/* ==========================================================================
+   À propos — bande large qui casse le rythme des sections projet
+   ========================================================================== */
+
+.about {
+  padding-block: var(--band);
+  border-top: 1px solid var(--line);
+}
+
+.about h2 {
+  grid-column: 1 / 3;
+  font-size: var(--fs-micro);
+  font-family: var(--font-mono);
+  font-weight: 400;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+  padding-top: 0.5rem;
+}
+
+.about-prose {
+  grid-column: 4 / 12;
+  display: grid;
+  gap: 1.25rem;
+  text-wrap: pretty;
+}
+
+.about-prose p:first-child {
+  font-size: clamp(1.4rem, 1.05rem + 1.6vw, 2.35rem);
+  font-family: var(--font-display);
+  font-weight: 560;
+  letter-spacing: -0.022em;
+  line-height: 1.18;
+  max-width: 24ch;
+}
+
+.about-prose p + p {
+  color: var(--ink-2);
+  max-width: 58ch;
+}
+
+.practices {
+  grid-column: 1 / -1;
+  margin: clamp(2.5rem, 6vh, 4rem) 0 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr));
+  gap: 1.5rem;
+}
+
+.practices > div {
+  border-top: 1px solid var(--line);
+  padding: 1.15rem 1rem 0 0;
+}
+
+.practices dt {
+  color: var(--accent-ink);
+  margin-bottom: 0.4rem;
+}
+
+.practices dd {
+  margin: 0;
+  font-size: 0.9rem;
+  color: var(--ink-2);
+  line-height: 1.45;
+}
+
+/* ==========================================================================
+   Clôture — contact et pied de page fondus en une bande
+   ========================================================================== */
+
+.outro {
+  padding-block: var(--band) 2.5rem;
+  border-top: 1px solid var(--line);
+}
+
+.outro h2 {
+  grid-column: 1 / 3;
+  font-size: var(--fs-micro);
+  font-family: var(--font-mono);
+  font-weight: 400;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+  padding-top: 0.5rem;
+}
+
+.outro-body {
+  grid-column: 4 / 12;
+  display: grid;
+  gap: 1.5rem;
+  justify-items: start;
+}
+
+.outro-body > p {
+  font-size: var(--fs-lead);
+  color: var(--ink-2);
+  max-width: 40ch;
+  text-wrap: pretty;
+}
+
+.outro-mail {
+  font-family: var(--font-display);
+  font-weight: 580;
+  font-size: clamp(1.35rem, 0.9rem + 2.4vw, 2.75rem);
+  letter-spacing: -0.025em;
+  color: var(--accent-ink);
+  text-decoration-thickness: 1px;
+  text-decoration-color: color-mix(in oklab, var(--accent-ink) 30%, transparent);
+  overflow-wrap: anywhere;
+}
+
+.outro-footer {
+  padding-bottom: 2.5rem;
+}
+
+.site-footer {
+  grid-column: 1 / -1;
+  margin-top: clamp(4rem, 12vh, 7rem);
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--line-soft);
+}
+
+.site-footer .grid {
+  align-items: baseline;
+  row-gap: 0.75rem;
+}
+
+.site-footer .foot-left {
+  grid-column: 1 / 7;
+}
+
+.site-footer .foot-right {
+  grid-column: 7 / 13;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 1.25rem;
+}
+
+.site-footer a {
+  text-decoration: none;
+}
+
+@media (max-width: 60rem) {
+  .site-footer .foot-right {
+    justify-content: flex-start;
+  }
+}
+
+/* ==========================================================================
+   Révélation au défilement — CSS natif, aucun JS, sans effet si non supporté
+   ========================================================================== */
+
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) and (min-width: 60.01rem) {
+    .showcase-device,
+    .showcase-text > * {
+      animation: rise-in linear both;
+      animation-timeline: view();
+      animation-range: entry 8% entry 62%;
+    }
+
+    .showcase-text > *:nth-child(2) {
+      animation-range: entry 12% entry 66%;
+    }
+
+    .showcase-text > *:nth-child(3) {
+      animation-range: entry 16% entry 70%;
+    }
+  }
+}
+
+@keyframes rise-in {
+  from {
+    opacity: 0;
+    transform: translateY(1.75rem);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
 }
 
 /* ==========================================================================
@@ -683,115 +879,136 @@ a:hover {
    ========================================================================== */
 
 .proj-head {
-  padding-top: 7.5rem;
-  display: grid;
-  gap: 1.25rem;
+  padding-block: clamp(3rem, 8vh, 5rem) clamp(2.5rem, 6vh, 4rem);
+  row-gap: 0.75rem;
 }
 
 .back-link {
-  font-family: var(--font-mono);
-  font-size: var(--fs-xs);
-  color: var(--ink-2);
-  text-decoration: none;
+  grid-column: 1 / -1;
   justify-self: start;
-}
-
-.back-link:hover {
-  color: var(--accent-ink);
+  text-decoration: none;
+  margin-bottom: clamp(1.5rem, 4vh, 2.5rem);
 }
 
 .proj-head h1 {
-  font-size: clamp(2.2rem, 1.4rem + 4.5vw, 4.5rem);
-  font-weight: 780;
-  font-stretch: 116%;
-  letter-spacing: -0.015em;
+  grid-column: 1 / 9;
+  font-size: var(--fs-title);
+  font-stretch: 102%;
 }
 
 .proj-tagline {
+  grid-column: 1 / 8;
+  font-size: var(--fs-lead);
+  line-height: 1.4;
   color: var(--ink-2);
-  font-size: var(--fs-lg);
-  max-width: 52ch;
   text-wrap: pretty;
 }
 
-.proj-media {
-  margin: clamp(1.5rem, 4vh, 2.5rem) 0 0;
-  aspect-ratio: 16 / 9;
-  border-radius: var(--radius);
-  overflow: hidden;
-  background: var(--surface);
-  border: 1px solid var(--line);
+.proj-device {
+  grid-column: 1 / -1;
+  position: relative;
+  margin-top: clamp(2.5rem, 6vh, 4rem);
+  display: flex;
+  justify-content: center;
 }
 
-.proj-media img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+.proj-device::before {
+  content: "";
+  position: absolute;
+  inset: -6%;
+  z-index: -1;
+  border-radius: 50%;
+  background: radial-gradient(
+    50% 50% at 50% 50%,
+    color-mix(in oklab, var(--accent) 22%, transparent),
+    transparent 72%
+  );
+  filter: blur(50px);
+  opacity: 0.5;
+}
+
+.proj-device .device--browser {
+  max-width: 64rem;
 }
 
 .proj-meta {
-  margin: clamp(1.75rem, 4vh, 2.75rem) 0 0;
-  padding-top: 1.5rem;
-  border-top: 1px solid var(--line);
+  grid-column: 1 / -1;
+  margin: clamp(2.5rem, 6vh, 4rem) 0 0;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr));
-  gap: 1.5rem 2rem;
+  grid-template-columns: repeat(auto-fit, minmax(9rem, 1fr));
+  gap: 1.5rem;
+}
+
+.proj-meta > div {
+  border-top: 1px solid var(--line);
+  padding: 1rem 1rem 0 0;
 }
 
 .proj-meta dt {
-  font-family: var(--font-mono);
-  font-size: var(--fs-xs);
   color: var(--accent-ink);
-  margin-bottom: 0.3rem;
+  margin-bottom: 0.35rem;
 }
 
 .proj-meta dd {
   margin: 0;
-  font-size: var(--fs-sm);
-  color: var(--ink);
-}
-
-.proj-meta dd a {
-  color: var(--accent-ink);
+  font-size: 0.9rem;
+  line-height: 1.45;
 }
 
 .proj-body {
-  padding-block: clamp(3rem, 8vh, 5rem);
-  max-width: 65ch;
+  grid-column: 4 / 11;
+  padding-block: clamp(3rem, 9vh, 5.5rem);
 }
 
 .proj-body h2 {
-  font-size: var(--fs-h3);
-  font-weight: 680;
-  font-stretch: 108%;
-  margin: 2.2em 0 0.6em;
+  font-family: var(--font-mono);
+  font-size: var(--fs-micro);
+  font-weight: 400;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--accent-ink);
+  margin: 3em 0 1.2em;
+  padding-top: 1.2em;
+  border-top: 1px solid var(--line-soft);
 }
 
 .proj-body h2:first-child {
   margin-top: 0;
+  padding-top: 0;
+  border-top: 0;
 }
 
 .proj-body p {
-  margin-bottom: 1em;
+  margin-bottom: 1.1em;
+  font-size: var(--fs-lead);
+  line-height: 1.5;
   color: var(--ink-2);
   text-wrap: pretty;
 }
 
-.proj-body strong {
+.proj-body p:first-of-type {
   color: var(--ink);
-  font-weight: 600;
+}
+
+.proj-body code {
+  font-family: var(--font-mono);
+  font-size: 0.85em;
+  color: var(--ink);
+  background: var(--surface);
+  padding: 0.15em 0.4em;
+  border-radius: 4px;
 }
 
 .proj-gallery {
+  grid-column: 1 / -1;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 22rem), 1fr));
-  gap: 1.5rem;
-  padding-bottom: clamp(3rem, 8vh, 5rem);
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 24rem), 1fr));
+  gap: var(--gutter);
+  padding-bottom: clamp(3rem, 9vh, 5.5rem);
 }
 
 .proj-gallery figure {
   margin: 0;
-  aspect-ratio: 16 / 10;
   border-radius: var(--radius);
   overflow: hidden;
   background: var(--surface);
@@ -800,36 +1017,29 @@ a:hover {
 
 .proj-gallery img {
   width: 100%;
-  height: 100%;
-  object-fit: cover;
+  height: auto;
 }
 
 .proj-nav {
+  grid-column: 1 / -1;
   border-top: 1px solid var(--line);
   padding-block: 2.5rem 4rem;
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 1.5rem;
+  gap: var(--gutter);
 }
 
 .proj-nav a {
   text-decoration: none;
   display: grid;
-  gap: 0.3rem;
-}
-
-.proj-nav .nav-dir {
-  font-family: var(--font-mono);
-  font-size: var(--fs-xs);
-  color: var(--ink-2);
+  gap: 0.4rem;
 }
 
 .proj-nav .nav-title {
   font-family: var(--font-display);
-  font-weight: 650;
-  font-stretch: 108%;
-  font-size: var(--fs-h3);
-  color: var(--ink);
+  font-weight: 580;
+  font-size: clamp(1.2rem, 1rem + 0.9vw, 1.75rem);
+  letter-spacing: -0.02em;
   transition: color 160ms ease-out;
 }
 
@@ -858,25 +1068,26 @@ a:hover {
    ========================================================================== */
 
 .notfound {
-  min-height: 100svh;
+  min-height: calc(100svh - 3.5rem);
   display: grid;
-  place-content: center;
-  justify-items: center;
-  text-align: center;
-  gap: 1.25rem;
-  padding-block: 6rem;
+  align-content: center;
+  gap: 1.5rem;
+  justify-items: start;
+  padding-block: var(--band);
 }
 
 .notfound h1 {
-  font-size: var(--fs-hero);
-  font-weight: 800;
-  font-stretch: 122%;
+  font-size: var(--fs-display);
+  font-weight: 620;
+  font-stretch: 105%;
+  line-height: 0.9;
 }
 
 .notfound p {
   color: var(--ink-2);
-  max-width: 40ch;
-  font-size: var(--fs-lg);
+  max-width: 42ch;
+  font-size: var(--fs-lead);
+  text-wrap: pretty;
 }
 
 /* ==========================================================================
@@ -884,22 +1095,24 @@ a:hover {
    ========================================================================== */
 
 .status-page {
-  padding-block: 7.5rem clamp(4rem, 10vh, 6rem);
+  padding-block: clamp(3rem, 8vh, 5rem) clamp(4rem, 10vh, 6rem);
   display: grid;
   gap: 1.25rem;
   max-width: 42rem;
 }
 
+.status-page .back-link {
+  margin-bottom: 0;
+}
+
 .status-page h1 {
-  font-size: clamp(2rem, 1.5rem + 2.5vw, 3rem);
-  font-weight: 780;
-  font-stretch: 116%;
-  letter-spacing: -0.015em;
+  font-size: var(--fs-title);
+  font-stretch: 102%;
 }
 
 .status-updated {
   font-family: var(--font-mono);
-  font-size: var(--fs-xs);
+  font-size: var(--fs-micro);
   color: var(--ink-2);
 }
 
@@ -912,6 +1125,7 @@ a:hover {
   border: 1px solid var(--line);
   border-radius: var(--radius);
   overflow: hidden;
+  background: var(--line);
 }
 
 .status-item {
@@ -931,7 +1145,7 @@ a:hover {
 }
 
 .status-item[data-status="up"] .status-dot {
-  background: var(--mousse);
+  background: oklch(76% 0.125 150);
 }
 
 .status-item[data-status="down"] .status-dot {
@@ -951,21 +1165,48 @@ a:hover {
   text-decoration: none;
 }
 
-.status-label a:hover {
-  color: var(--accent-ink);
-}
-
 .status-domain {
   display: block;
   font-family: var(--font-mono);
-  font-size: var(--fs-xs);
+  font-size: var(--fs-micro);
   color: var(--ink-2);
 }
 
 .status-state {
   flex: none;
   font-family: var(--font-mono);
-  font-size: var(--fs-xs);
+  font-size: var(--fs-micro);
   color: var(--ink-2);
   text-transform: uppercase;
+}
+
+/* ==========================================================================
+   Écrans courts — ne jamais forcer un plein écran qui rogne
+   ========================================================================== */
+
+@media (max-height: 34rem) {
+  .hero,
+  .showcase,
+  .notfound {
+    min-height: 0;
+  }
+
+  .device--phone {
+    height: auto;
+    width: min(100%, 15rem);
+  }
+}
+
+@media (max-width: 60rem) {
+  .showcase {
+    min-height: 0;
+  }
+
+  .showcase[data-side="left"] .showcase-device {
+    order: 0;
+  }
+
+  .showcase-device {
+    margin-top: clamp(2rem, 5vh, 3rem);
+  }
 }
